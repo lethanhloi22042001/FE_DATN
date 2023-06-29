@@ -1,0 +1,22 @@
+// Vì đã có cấu trúc sẵn
+1. chạy npm i trước để cài gói hàng
+
+JSX :Cấu trúc của React dùng để render ra views
+ +1 : nó chính là render ra dữ liệu ==> cho phép code HTML + JavaScript trong file của mình
+
+
+Redux : 
+// nằm trong file App.js
+const mapStateToProps = state => {
+    return {
+        started: state.app.started,
+        isLoggedIn: state.admin.isLoggedIn
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+    };
+};
+
+==> Phải tìm hiểu lifeCycle của React 
