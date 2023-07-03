@@ -6,6 +6,9 @@ import { push } from "connected-react-router"; //
 import * as actions from "../../store/actions" ;
 import './Login.scss';
 
+
+import { handleLoginApi } from '../../services/userService';
+
 import { FormattedMessage } from 'react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserDoctor } from '@fortawesome/free-solid-svg-icons';
@@ -17,27 +20,74 @@ class Login extends Component {
         this.state = {
             username: '',
             password :'',
-            isShowHidePassword : false ,
+            isShowHidePassWord : false,
+            errMessage : '',
 
         }
     } 
     handleOnChangeInput = (event)=>{
         this.setState({username : event.target.value});
-        console.log(event.target.value);
     }
 
     handleOnChangepassword = (event)=>{
         this.setState({password : event.target.value});
-        console.log(event.target.value);
     }
-    handleLogin = ()=>{
-        console.log('username ' + this.state.username);
-        console.log('password ' + this.state.password);
-        console.log('password ' , this.state);
+    
+    handleHideShowPassword = ()=>{
+        this.setState({isShowHidePassWord : !this.state.isShowHidePassWord});
     }
-    isShowHidePassword= ()=>{
-        this.setState( {isShowHidePassword : !this.state.isShowHidePassword});
+    // handleLogin = async()=>{
+    //     console.log('user name', this.state.username , 'password',this.state.password);
+    //     this.setState({errMessage : ''}) ;
+    //     try {
+    //         let data = await this.handleLoginApi(this.state.username , this.state.password);
+    //         if(data && data.error !== 0){
+    //             this.setState({
+    //                 errMessage: data.errMessage
+    //             })
+    //         }
+    //         if(data && data.error ===0){
+    //             this.props.userLoginSuccess(data.user);
+    //             console.log('login sucess');
+    //         }
+    //     } catch (error) {
+    //        if(error.response){
+    //             if(error.response.data){
+    //                 this.setState({errMessage : error.response.data.message});
+    //             }
+    //        }
+    //        console.log(error.response);
+    //     }
+    // }
+    handleLogin = async () => {
+        this.setState({
+            errMessage: ''
+        })
+        try {
+            let data = await handleLoginApi(this.state.username, this.state.password)
+            if(data && data.errCode !==0) {
+                this.setState({
+                    errMessage: data.message
+                })
+            }
+            if(data && data.errCode === 0) {
+                // this.props.userLoginSuccess(data.user);
+                this.props.userLoginSuccess(data.user);
+                // this.props.navigate("/header");
+            }
+        } catch (error) {
+            if (error.response) {  
+                if (error.response.data) {
+                    this.setState({
+                        errMessage: error.response.data.message
+                    })
+                }
+            }
+
+        }
     }
+    
+
     render() { 
         return ( 
             <div className='login-background'>
@@ -66,25 +116,30 @@ class Login extends Component {
                                 <label className =''> Username: </label>
 
                                 <input
-                                     placeholder='Enter your User Name...'  type='text' className='form-control '
+                                     placeholder='Enter your User Name...'  type= 'text' className='form-control '
                                      value={this.state.username} onChange={(event)=>{this.handleOnChangeInput(event)} }
                                 />
+                                
                             </div>
                             <div className='col-12 form-group login-input'>
                                 <label className= ''> Password:</label>
                                 <input
                                     className='form-control'
-                                    placeholder='Enter your password...' type={ this.state.isShowHidePassword ? 'text' : 'password' }
+                                    placeholder='Enter your password...' type={ this.state.isShowHidePassWord ? 'text' : 'password'}
                                     value={this.state.password} onChange={(event)=>{this.handleOnChangepassword(event)}}
                                 />
-                                <span onClick={()=>{this.isShowHidePassword();}}>
-                                    <i class= {this.state.isShowHidePassword ? "far fa-eye" : 'fas fa-eye-slash'}   ></i>
+                                <span onClick={()=>{
+                                    this.handleHideShowPassword();}}>
+                                     <i class = { this.state.isShowHidePassWord ? 'fab fa-google-plus fa-beat-fade' : 'fab fa-facebook facebook'} ></i>
                                 </span>
                             </div>
+                            <div className='col-12' style={{color :'red'}}>
+                               { this.state.errMessage}
+                            </div>
                             
-                            <button  className='btn-login' onClick={()=>{
-                                this.handleLogin()
-                            }}>Login</button>
+                            <button  className='btn-login' onClick={ ()=>{
+                                this.handleLogin();
+                            }} >Login</button>
                             <span className='forgot-password'>Forgot your password?</span>
                             
                             <div className='col-12 text-center mt-3'>
@@ -113,8 +168,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
+        // adminLoginFail: () => dispatch(actions.adminLoginFail()),
+
     };
 };
 
