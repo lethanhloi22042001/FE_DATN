@@ -3,6 +3,7 @@ import { connect } from 'react-redux';      // kết nối react redux
 import { push } from "connected-react-router"; // 
 
 // import * as actions from "../store/actions";
+// Hàm actions là hàm hành động
 import * as actions from "../../store/actions" ;
 import './Login.scss';
 
@@ -36,29 +37,7 @@ class Login extends Component {
     handleHideShowPassword = ()=>{
         this.setState({isShowHidePassWord : !this.state.isShowHidePassWord});
     }
-    // handleLogin = async()=>{
-    //     console.log('user name', this.state.username , 'password',this.state.password);
-    //     this.setState({errMessage : ''}) ;
-    //     try {
-    //         let data = await this.handleLoginApi(this.state.username , this.state.password);
-    //         if(data && data.error !== 0){
-    //             this.setState({
-    //                 errMessage: data.errMessage
-    //             })
-    //         }
-    //         if(data && data.error ===0){
-    //             this.props.userLoginSuccess(data.user);
-    //             console.log('login sucess');
-    //         }
-    //     } catch (error) {
-    //        if(error.response){
-    //             if(error.response.data){
-    //                 this.setState({errMessage : error.response.data.message});
-    //             }
-    //        }
-    //        console.log(error.response);
-    //     }
-    // }
+    
     handleLogin = async () => {
         this.setState({
             errMessage: ''
@@ -73,6 +52,7 @@ class Login extends Component {
             if(data && data.errCode === 0) {
                 // this.props.userLoginSuccess(data.user);
                 this.props.userLoginSuccess(data.user);
+                console.log('Khong hieu doan nay nen log data',data);
                 // this.props.navigate("/header");
             }
         } catch (error) {
