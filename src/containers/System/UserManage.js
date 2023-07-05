@@ -62,7 +62,7 @@ class UserManage extends Component {
                                 <tr>
                                     <td>{item.id}</td>
                                     <td>{item.email}</td>
-                                    <td> <img src="images/Zinzu Chan Lee.jpg" alt="" />{item.firstName}</td>
+                                    <td> {item.firstName}</td>
                                     <td> {item.lastName} </td>
                                     <td> {item.address} </td>
                                     <td> <strong> {item.phonenumber} </strong></td>
