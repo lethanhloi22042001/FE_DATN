@@ -3,12 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss'
 import { getAllUsers } from '../../services/userService';
+import ModleUser from './ModleUser'
 class UserManage extends Component {
     constructor(props){
         super(props)
         this.state = {
-            arrUsers : []
-
+            arrUsers : [],
+            isOpenModalUser : false ,
         }
     }
 
@@ -19,9 +20,9 @@ class UserManage extends Component {
             this.setState({
                 arrUsers : response.users
             },()=>{
-                console.log('Check Status' , this.state.users);
+                // console.log('Check Status' , this.state.users);
             });
-            console.log('Check Status 1' , this.state.users);
+            // console.log('Check Status 1' , this.state.users);
         }
     }
 
@@ -29,18 +30,38 @@ class UserManage extends Component {
     state = {
 
     }
+    // bấm bên ADD cú thì isOpenModalUser thành "true" xong toggleUserModle hiện lên
+    // xét toggleUserModle 
+    handleAddUser = ()=>{
+            this.setState({isOpenModalUser : true}) 
+        }
 
+    toggleUserModle = ()=>{
+        this.setState({
+            isOpenModalUser : !this.state.isOpenModalUser 
+        });
+    }
 
-
+    createNewUser = (data)=>{
+            // alert("Call me")
+            console.log('check data from child'  ,data);
+    }
     render() {
-        let arrUsers = this.state.arrUsers ;
+        let arrUsers = this.state.arrUsers  ;
         return (
+                <div className="tables">
+                    <ModleUser isOpen  = {this.state.isOpenModalUser}
+                                test = {'Hello may cu'}
+                                toggleParentUserModle ={this.toggleUserModle}
+                                size='lg'
+                                createNewUser  = {this.createNewUser}
+                    />
 
-            <div className="tables">
-                <div className="text-center">Manage users</div>
                 <h1 className='text-center'>Manage users</h1>
                     <img src="images/search.png" alt="" />
-                
+                <div className='addNewUser' onClick={ ()=>{this.handleAddUser()}}>
+                <a href="#" class="btn btn-primary btn-lg active btnAddUser" role="button" aria-pressed="true">Add New User</a>
+                </div>
                 <section className="table__body">
                 <table>
                     <thead>

@@ -300,3 +300,73 @@
     width: 2rem;
     height: auto;
   }
+
+  .btnAddUser{
+    color: #06171d;
+    background-color: #6c00bd;
+    height: 35px;
+    width: 163px;
+    border-radius: 1em 0.5rem;
+    margin-left: 50px;
+  }
+
+
+
+.modal-user-container {
+  .modal-content {
+      .modal-header{
+          button {
+              background-color: transparent;
+              border: none;
+              color: #fff;
+              font-size: 20px;
+
+              &:hover {
+                  cursor: pointer;
+              }
+          }
+      }
+  }
+
+  .modal-user-body {
+      display: flex;
+      gap: 15px;
+
+      .input-container {
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+          margin-bottom: 10px;
+
+          input {
+              border-radius: 3px;
+              height: 30px;
+              border: 1px solid grey;
+              outline: none;
+              padding: 0 10px;
+          }
+      }
+  }
+}
+
+.modal-user-container {
+  .modal-user-body1 {
+      display: flex;
+
+      .input-container1 {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          margin-bottom: 10px;
+
+
+          input {
+              border-radius: 3px;
+              height: 30px;
+              border: 1px solid grey;
+              outline: none;
+              padding: 0 10px;
+          }
+      }
+  }
+}
