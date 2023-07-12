@@ -2,20 +2,29 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss'
-import { getAllUsers } from '../../services/userService';
+import { getAllUsers ,createNewUserService ,deleteNewUserService, handleLoginApi} from '../../services/userService';
+import {emitter} from '../../utils/emitter' ;
 import ModleUser from './ModleUser'
+import ModleEditUser from './ModleEditUser';
+
+
 class UserManage extends Component {
     constructor(props){
         super(props)
         this.state = {
             arrUsers : [],
             isOpenModalUser : false ,
+            isOpenEditUser  : false ,
         }
     }
 
     async componentDidMount() {
+        await this.getAllUsersFromReact();
+    }
+    
+    getAllUsersFromReact = async()=>{
         let response = await getAllUsers('ALL'); 
-        console.log('ths is response',response);
+        // response {errCode: 0, errMessage: 'OK', users: Array(8)} 
         if(response && response.errCode === 0){
             this.setState({
                 arrUsers : response.users
@@ -25,7 +34,6 @@ class UserManage extends Component {
             // console.log('Check Status 1' , this.state.users);
         }
     }
-
 
     state = {
 
@@ -42,19 +50,54 @@ class UserManage extends Component {
         });
     }
 
-    createNewUser = (data)=>{
-            // alert("Call me")
-            console.log('check data from child'  ,data);
+    createNewUser = async (data)=>{
+        // data là những gì mình nạp vào
+
+        let response = await createNewUserService(data);
+        // response {errCode: 0, message: 'OK'}
+
+        if(response && response.errCode !== 0){
+            alert(response.errMessage) ;
+        }else{
+            await this.getAllUsersFromReact();
+            this.setState({
+                isOpenModalusers: false
+            })
+            emitter.emit('EVENT_CLEAR_MODAL_DATA', { 'id': 'your id' })
+        }
     }
+    handledelete = async (data)=>{
+            console.log(data,'this is delet Data');
+            let response = await deleteNewUserService(data.id);
+
+            if(response && response.errCode !== 0){
+                alert("xoa chua thanh cong")
+            }else{
+                await this.getAllUsersFromReact();
+            }
+    }
+
+    handdleEditUser = async(data)=>{
+        console.log('this is data of handdleEditUser',data);
+        this.setState({isOpenEditUser : true});
+    }
+
     render() {
         let arrUsers = this.state.arrUsers  ;
         return (
                 <div className="tables">
                     <ModleUser isOpen  = {this.state.isOpenModalUser}
                                 test = {'Hello may cu'}
-                                toggleParentUserModle ={this.toggleUserModle}
+                                toggleParentUserModle ={this.toggleUserModle} // khi click ra ngoài thì form biến mất
                                 size='lg'
-                                createNewUser  = {this.createNewUser}
+                                createNewUser = {this.createNewUser}
+                    />
+
+                    <ModleEditUser
+                        
+                        isOpen  = {this.state.isOpenEditUser}
+                    
+                    
                     />
 
                 <h1 className='text-center'>Manage users</h1>
@@ -89,8 +132,12 @@ class UserManage extends Component {
                                     <td> <strong> {item.phonenumber} </strong></td>
                                     <td className='btn-addDelete'>
                                         {/* <p className="status delivered">Delivered</p> */}
-                                        <button type="" className='status delivered asd1'>Deleted</button>
-                                        <button type="" className='status delivered asd'>Add</button>
+                                        <button type="" className='status delivered asd1' onClick={()=>{
+                                            this.handledelete(item) 
+                                        }}>Deleted</button>
+                                        <button type="" className='status delivered asd' onClick={()=>{
+                                            this.handdleEditUser(item);
+                                        }}>Edit User</button>
                                     </td>
                                 </tr>
                             ) 

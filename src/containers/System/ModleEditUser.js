@@ -11,10 +11,7 @@ import {
   } from 'reactstrap';
   import {emitter} from '../../utils/emitter' ;
 
-
-
-
-class ModleUser extends Component {
+class ModleEditUser extends Component {
     constructor(props){
         super(props)
         this.state  = {
@@ -43,16 +40,13 @@ class ModleUser extends Component {
 
     toggle = ()=>{
         this.props.toggleParentUserModle()
-        console.log(  ' this.props.toggleParentUserModle()' ,this.props.toggleParentUserModle());
     }
  
 
     isFill = ()=>{
         let isValid = true ;
         let arr = ['email','password','firstName','lastName' ,'address'] ;
-
          for(let i= 0 ; i < arr.length ; i++){
-            // nó khác cái trường state ở trên hay là lấy cái mảng ở trong này
             if( !this.state[arr[i]] ){
                 isValid = false ;
                 alert("vui long dien day du thong tin ");
@@ -62,11 +56,7 @@ class ModleUser extends Component {
 
         return isValid ;
     }
-    //handleAddNewUser: khi nhấn Addnew thì chỉ kiểm tra xem có trống hay không
-    //   this.props.createNewUser() : 
-    // Bước 2: sau khi đã hoàn thành xong bước 1 setState rồi
-    //          Gọi hàm this.props.createNewUser(this.state); để truyển dữ liệu xuống cho BE thông qua API
-   // còn hàm   createNewUser = ()=>{ chỉ dùng để chheck đã điền đầy đủ hay chưa
+    
     createNewUser = ()=>{
         let check = this.isFill();
 
@@ -74,28 +64,19 @@ class ModleUser extends Component {
         this.props.createNewUser(this.state);
         }
     }
-
-
-    // BƯỚC 1 : setState
-    //Lấy dữ liệu ra (Bước 1 : Lấy toàn bộ dữ liệu từ form và để SetState)
+ 
     getDataFromForm = (event,name)=>{
-        // copy ra
         let copyState = {...this.state} ;
-        //
-        // copyState[name] = event.target.value ;
         copyState[name] = event.target.value ;
         
         this.setState({...copyState} , ()=>{ console.log('check',this.state)})
     }
-    // onChange={(event)=>{this.handleOnChangeInput(event)}
-
     render() {
-        // console.log('check Child props',this.props );
-        // console.log('check Child openmodl',this.props.test  );
+        
         return (
             <Modal isOpen={this.props.isOpen} toggle={()=>{}} className={'modal-user-container'}>
 
-            <ModalHeader toggle={ ()=>{this.toggle()}}>Modal title</ModalHeader>
+            <ModalHeader toggle={ ()=>{this.toggle()}}>Edit User</ModalHeader>
             <ModalBody>
             <div className='modal-user-body'>
                         <div className='input-container'>
@@ -171,4 +152,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModleUser);
+export default connect(mapStateToProps, mapDispatchToProps)(ModleEditUser);
