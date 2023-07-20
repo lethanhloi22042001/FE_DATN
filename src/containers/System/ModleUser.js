@@ -67,11 +67,10 @@ class ModleUser extends Component {
     // Bước 2: sau khi đã hoàn thành xong bước 1 setState rồi
     //          Gọi hàm this.props.createNewUser(this.state); để truyển dữ liệu xuống cho BE thông qua API
    // còn hàm   createNewUser = ()=>{ chỉ dùng để chheck đã điền đầy đủ hay chưa
-    createNewUser = ()=>{
+    createNewUserModleUserThis =  ()=>{
         let check = this.isFill();
-
         if(check === true){
-        this.props.createNewUser(this.state);
+        this.props.createNewUserModleUser(this.state);
         }
     }
 
@@ -95,7 +94,7 @@ class ModleUser extends Component {
         return (
             <Modal isOpen={this.props.isOpen} toggle={()=>{}} className={'modal-user-container'}>
 
-            <ModalHeader toggle={ ()=>{this.toggle()}}>Modal title</ModalHeader>
+            <ModalHeader toggle={ ()=>{this.toggle()}}>Add New User</ModalHeader>
             <ModalBody>
             <div className='modal-user-body'>
                         <div className='input-container'>
@@ -148,7 +147,7 @@ class ModleUser extends Component {
 
             </ModalBody>
             <ModalFooter>
-            <Button color="primary" onClick={ ()=>{this.createNewUser()}}>
+            <Button color="primary" onClick={ ()=>{this.createNewUserModleUserThis()}}>
                 Add New
             </Button>{' '}
             <Button color="secondary" onClick={ ()=>{this.toggle()}}>

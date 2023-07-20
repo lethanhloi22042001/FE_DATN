@@ -1,4 +1,28 @@
 {
+    "homeheader": {
+        "speciality": "Medical Specialty",
+        "searchdoctor": "Outstanding specialty",
+        "health-facility": "Facility",
+        "select-room": "Outstanding clinic",
+        "doctor1": "Doctor",
+        "select-doctor": "Outstanding doctor",
+        "medical-package": "Medical package",
+        "generalHC": "General health check",
+        "handbook": "Handbook",
+        "handbook-des": "Health handbook",
+        "support": "Support",
+        "welcome": "What's up, "
+    },
+    "banner": {
+        "title1": "MEDICAL PLATFORM",
+        "title2": "COMPREHENSIVE HEALTH CARE",
+        "bannerp1": "Specialized examination",
+        "bannerp2": "Remote medical examination",
+        "bannerp3": "General examination",
+        "bannerp4": "Medical test",
+        "bannerp5": "Mental Health",
+        "bannerp6": "Dental examination"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss'
-import { getAllUsers ,createNewUserService ,deleteNewUserService, handleLoginApi} from '../../services/userService';
+import { getAllUsers ,createNewUserService ,deleteNewUserService, updateUser} from '../../services/userService';
 import {emitter} from '../../utils/emitter' ;
 import ModleUser from './ModleUser'
 import ModleEditUser from './ModleEditUser';
@@ -15,6 +15,8 @@ class UserManage extends Component {
             arrUsers : [],
             isOpenModalUser : false ,
             isOpenEditUser  : false ,
+            userEdit        : {}    ,
+
         }
     }
 
@@ -28,18 +30,14 @@ class UserManage extends Component {
         if(response && response.errCode === 0){
             this.setState({
                 arrUsers : response.users
-            },()=>{
-                // console.log('Check Status' , this.state.users);
             });
-            // console.log('Check Status 1' , this.state.users);
         }
     }
 
     state = {
 
     }
-    // bấm bên ADD cú thì isOpenModalUser thành "true" xong toggleUserModle hiện lên
-    // xét toggleUserModle 
+     
     handleAddUser = ()=>{
             this.setState({isOpenModalUser : true}) 
         }
@@ -49,13 +47,15 @@ class UserManage extends Component {
             isOpenModalUser : !this.state.isOpenModalUser 
         });
     }
+    // Khi nhấn ra close hay dấu X thì nó sẽ đóng cái toggle lại
+    toggleEditModle = ()=>{
+        this.setState({
+            isOpenEditUser : !this.state.isOpenEditUser 
+        });
+    }
 
     createNewUser = async (data)=>{
-        // data là những gì mình nạp vào
-
         let response = await createNewUserService(data);
-        // response {errCode: 0, message: 'OK'}
-
         if(response && response.errCode !== 0){
             alert(response.errMessage) ;
         }else{
@@ -66,6 +66,7 @@ class UserManage extends Component {
             emitter.emit('EVENT_CLEAR_MODAL_DATA', { 'id': 'your id' })
         }
     }
+
     handledelete = async (data)=>{
             console.log(data,'this is delet Data');
             let response = await deleteNewUserService(data.id);
@@ -78,8 +79,34 @@ class UserManage extends Component {
     }
 
     handdleEditUser = async(data)=>{
-        console.log('this is data of handdleEditUser',data);
-        this.setState({isOpenEditUser : true});
+        this.setState({
+            isOpenEditUser : true,
+            userEdit : data ,
+        },()=>{
+            console.log(this.state.userEdit);
+        })
+       
+    }
+
+    updateUser = async(data)=>{
+       
+        try {
+            let response = await updateUser(data);
+            if(response && response.errCode === 0){
+                await this.getAllUsersFromReact();
+                this.setState({
+                    isOpenEditUser : false
+                })
+                alert('Update thanh cong');
+
+            }else{
+                alert(response.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     render() {
@@ -90,15 +117,18 @@ class UserManage extends Component {
                                 test = {'Hello may cu'}
                                 toggleParentUserModle ={this.toggleUserModle} // khi click ra ngoài thì form biến mất
                                 size='lg'
-                                createNewUser = {this.createNewUser}
+                                createNewUserModleUser = {this.createNewUser}
                     />
 
-                    <ModleEditUser
+                    {   this.state.isOpenEditUser &&
+                        <ModleEditUser
                         
-                        isOpen  = {this.state.isOpenEditUser}
-                    
-                    
-                    />
+                        isOpen  = {this.state.isOpenEditUser} // xổ khung dữ liệu
+                        toggleParentUserModle ={this.toggleEditModle}
+                        currentUser = {this.state.userEdit} // 
+                        updateNewUser = {this.updateUser}
+                        
+                    />}
 
                 <h1 className='text-center'>Manage users</h1>
                     <img src="images/search.png" alt="" />

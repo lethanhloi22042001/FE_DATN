@@ -1,0 +1,11 @@
+lấy dữ liệu
+1. Tạo ra 1 biến để hứng dữ liệu
+this.state = {
+            ...,
+            userEdit        : {}    ,
+        }
+2.Từ form đã render ra dữ liệu 
+    - dùng onClick( ()=>{ } ) của react để lấy dữ liệu từ item
+      b1 : Khởi tạo đại 1 hàm abc để lấy dữ liệu từ item
+      b2 : Khởi tạo hàm từ như tên b1 để hứng data ()
+      b3 : Trong hàm abc => dùng hàm setState để set lại dữ liệu từ state

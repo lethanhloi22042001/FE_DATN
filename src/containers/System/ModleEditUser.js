@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import './UserManage.scss'
 import { connect } from 'react-redux';
+import _ from 'lodash'
 import {
     Button,
     Modal,
@@ -15,6 +16,7 @@ class ModleEditUser extends Component {
     constructor(props){
         super(props)
         this.state  = {
+            id : '',
             email :'',
             password : '',
             firstName : '',
@@ -35,6 +37,19 @@ class ModleEditUser extends Component {
         })
     } 
     componentDidMount() {
+          let user =  this.props.currentUser  
+          if(user && !_.isEmpty(user) ){
+                // !_.isEmpty(user) dùng thư viện lodash để check xem Object user có trống hay không
+              this.setState( {
+                id : user.id,
+                email : user.email ,
+                password : 'user.email' ,
+                firstName : user.firstName, 
+                lastName : user.lastName ,
+                address : user.address 
+              } );
+          }
+          
 
     }
 
@@ -57,11 +72,10 @@ class ModleEditUser extends Component {
         return isValid ;
     }
     
-    createNewUser = ()=>{
+    currentUser = ()=>{
         let check = this.isFill();
-
         if(check === true){
-        this.props.createNewUser(this.state);
+        this.props.currentUser(this.state);
         }
     }
  
@@ -71,8 +85,15 @@ class ModleEditUser extends Component {
         
         this.setState({...copyState} , ()=>{ console.log('check',this.state)})
     }
+
+    updateNewUser = ()=>{
+        this.props.updateNewUser(this.state)
+    }
+
+
+    
     render() {
-        
+        console.log('check props form Parents', this.props.currentUser);
         return (
             <Modal isOpen={this.props.isOpen} toggle={()=>{}} className={'modal-user-container'}>
 
@@ -129,8 +150,8 @@ class ModleEditUser extends Component {
 
             </ModalBody>
             <ModalFooter>
-            <Button color="primary" onClick={ ()=>{this.createNewUser()}}>
-                Add New
+            <Button color="primary" onClick={ ()=>{this.updateNewUser()}}>
+                UpDate
             </Button>{' '}
             <Button color="secondary" onClick={ ()=>{this.toggle()}}>
                 Cancel

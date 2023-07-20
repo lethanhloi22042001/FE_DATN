@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter as Router } from "connected-react-router";
 import { history } from "../redux";
 import { ToastContainer } from "react-toastify";
+import CustomScrollbars from "../components/CustomScrollbars";
 
 import {
   userIsAuthenticated,
@@ -16,9 +17,10 @@ import Home from "../routes/Home";
 import Login from "./Auth/Login";
 import Header from "./Header/Header";
 import System from "../routes/System";
+import HomePage from "./HomePage/HomePage"
 
 import { CustomToastCloseButton } from "../components/CustomToast";
-import ConfirmModal from "../components/ConfirmModal";
+
 
 class App extends Component {
   handlePersistorState = () => {
@@ -46,22 +48,21 @@ class App extends Component {
           {" "}
           {/* dùng để lưu dữ liệu khi refresh lại trang web */}
           <div className="main-container">
-            <ConfirmModal />
-            {this.props.isLoggedIn && <Header />}{" "}
+            {this.props.isLoggedIn && <Header />}{/* "Nếu đăng nhập thì lôi thanh Header vào " */} 
             {/* Check Login , Nếu Logined thì render ra Header */}
-            <span className="content-container">
-              <Switch>
-                <Route path={path.HOME} exact component={Home} />
-                <Route
-                  path={path.LOGIN}
-                  component={userIsNotAuthenticated(Login)}
-                />
-                <Route
-                  path={path.SYSTEM}
-                  component={userIsAuthenticated(System)}
-                />
-              </Switch>
-            </span>
+
+            <div className="content-container">
+                <CustomScrollbars style = {{height : '100vh',with :'100%', border: '1px solid red'}} >
+                  <Switch>
+                      {/* Route  path = 'Đường dẫn lấy từ path(ở trong untils/constant  và render ra component ở Container)' */}
+                      <Route path={path.HOME} exact component={Home} />
+                      <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} /> {/*userIsNotAuthenticated : nó như 1 middle ware => check quyền có được vào Login hay là không*/}
+                      <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                      <Route path={path.HOMEPAGE} exact component={HomePage} />
+                    </Switch>
+                  </CustomScrollbars>
+            </div>
+
             <ToastContainer
               className="toast-container"
               toastClassName="toast-item"

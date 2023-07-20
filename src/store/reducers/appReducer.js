@@ -18,12 +18,14 @@ const initialState = {
 
 const appReducer = (state = initialState, action) => {
     switch (action.type) {
+        
         case actionTypes.APP_START_UP_COMPLETE: 
             return {
                 ...state,
                 started: true
             }
         case actionTypes.SET_CONTENT_OF_CONFIRM_MODAL: 
+
             return {
                 ...state,
                 contentOfConfirmModal: {
@@ -31,6 +33,14 @@ const appReducer = (state = initialState, action) => {
                     ...action.contentOfConfirmModal
                 }
             }
+        case actionTypes.CHANGE_LANGUAGE: 
+            console.log('Check Process of Redux 3',action);
+            return {
+                ...state,
+                language :  action.language,
+            }
+
+
         default:
             return state;
     }
