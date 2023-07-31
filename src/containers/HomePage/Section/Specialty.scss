@@ -1,16 +1,16 @@
-.section-speacialty {
+.section-specialty {
   height: 330px;
   width: 100%;
   // padding: 50px;
   // vì sao phải bọc thêm 1 div nữa , xem lại cái header
-  .specialty-content {
-    // margin-left: 150px;
+  .section-container {
     padding: 15px 130px 10px 130px;
-    .top-text {
+
+    .section-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-        .ck-text {
+        .title-section {
         font-family: Montserrat ;
         font-size: 24px ;
         font-weight: 700 ;
@@ -18,7 +18,7 @@
         padding: 15px 0px 5px ;
           
         }
-        .ck-text-right{
+        .btn-section{
           font-family: Montserrat ;
           font-size: 24px ;
           font-weight: 700 ;
@@ -37,7 +37,30 @@
 
     }
 
-    
+    .section-body{
+
+      .specialty-customize {
+          .bg-img {
+            width: 278px !important;
+            height: 156px !important;
+            cursor: pointer;
+            padding-left: 5px;
+            padding-right: 5px;
+            border: 1px solid #eee;
+            background: url("../../../assets/speciality/vg1.jpeg");
+          }
+          
+          .pictureT{
+            
+          }
+
+      }
+    }
+
+
+
+
+
     .slick-slide{
       width: 278px !important;
       height: 156px !important;
@@ -47,19 +70,7 @@
     
     }
   }
-
-  .pictureT {
-  }
-  .bg-img {
-    //278 156
-    width: 278px !important;
-    height: 156px !important;
-    cursor: pointer;
-    padding-left: 5px;
-    padding-right: 5px;
-    border: 1px solid #eee;
-    background: url("../../../assets/speciality/vg1.jpeg");
-  }
+  
 }
 
  

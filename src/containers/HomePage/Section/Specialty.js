@@ -4,8 +4,7 @@ import "./Specialty.scss";
 import { FormattedMessage } from "react-intl"; // Thư viện : international language (react-intl)
 
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import specialityImg from '../../../assets/speciality/vg1.jpeg'
 
 class Specialty extends Component { 
@@ -33,51 +32,45 @@ class Specialty extends Component {
   
   
   render() {
-    let settings = {
-      // dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 1, 
-    }
+    // let settings = this.props.settings ;
+
     return (
-      <div className="section-speacialty">
-        <div className="specialty-content">
-            <div className="top-text">
-              <div className="ck-text"> Chuyên Khoa Phổ Biến</div>
-              <div className="ck-text-right">Xem Thêm</div>
+      <div className="section-share section-specialty">
+        <div className="section-container">
+            <div className="section-header">
+              <div className="title-section"> Chuyên Khoa Phổ Biến</div>
+              <button className="btn-section">Xem Thêm</button>
             </div>
-            <Slider {...settings}>
-                        <div className="specialty-body" >
-                          <div className="bg-img"></div>
-                          <div className="pictureT">Cơ Xương Khớp</div>
-                        </div>
 
-                        <div className="specialty-body">
-                          <div className="bg-img"> </div>
-                          <div className="pictureT">Thần kinh</div>
-                        </div>
+            <div className="section-body">
+              <Slider { ...this.props.settings}>
+                          <div className="specialty-customize" >
+                            <div className="bg-img"></div>
+                            <div className="pictureT">Cơ Xương Khớp</div>
+                          </div>
+                          <div className="specialty-customize">
+                            <div className="bg-img"> </div>
+                            <div className="pictureT">Thần kinh</div>
+                          </div>
+                          <div className="specialty-customize">
+                            <div className="bg-img"> </div>
+                            <div className="pictureT">Thần kinh</div>
+                          </div>
+                          <div className="specialty-customize">
+                            <div className="bg-img"> </div>
+                            <div className="pictureT">Tiêu Hoá</div>
+                          </div>
+                          <div className="specialty-customize">
+                            <div className="bg-img"> </div>
+                            <div className="pictureT">Tim Mạch</div>
+                          </div>
+                          <div className="specialty-customize">
+                            <div className="bg-img"> </div>
+                            <div className="pictureT">Tai Mũi Họng</div>
+                          </div>
+              </Slider>
+            </div>
 
-                        <div className="specialty-body">
-                          <div className="bg-img"> </div>
-                          <div className="pictureT">Thần kinh</div>
-                        </div>
-
-                        <div className="specialty-body">
-                          <div className="bg-img"> </div>
-                          <div className="pictureT">Tiêu Hoá</div>
-                        </div>
-
-                        <div className="specialty-body">
-                          <div className="bg-img"> </div>
-                          <div className="pictureT">Tim Mạch</div>
-                        </div>
-
-                        <div className="specialty-body">
-                          <div className="bg-img"> </div>
-                          <div className="pictureT">Tai Mũi Họng</div>
-                        </div>
-            </Slider>
         </div>
       </div>
     );

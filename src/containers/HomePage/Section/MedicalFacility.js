@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HomeHeader from "../HomeHeader";
-// import Specialty from "./Section/Specialty";
 import "./MedicalFacility.scss";
-// import CustomScrollbars from "../../components/CustomScrollbars";
 
 class MedicalFacility extends Component {
   render() {
