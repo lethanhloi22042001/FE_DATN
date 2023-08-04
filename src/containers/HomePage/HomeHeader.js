@@ -10,7 +10,6 @@ import {changeLanguageApp} from '../../store/actions'  ;
 
 class HomeHeader extends Component {
     changeLanguage = (language)=>{
-        // alert("Click thanh cong");
         this.props.changeLanguageAppRedux(language);
     }
   render() {

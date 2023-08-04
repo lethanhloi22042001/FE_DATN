@@ -1,16 +1,17 @@
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Slider from "react-slick";
 import '../HomePage.scss'
 
-class Specialty extends Component { 
+class HandBook extends Component { 
   render() {
     // let settings = this.props.settings ;
     return (
       <div className="section-share section-specialty">
         <div className="section-container">
             <div className="section-header">
-              <div className="title-section"> Chuyên Khoa Phổ Biến</div>
+              <div className="title-section"> Cẩm Nang </div>
               <button className="btn-section">Xem Thêm</button>
             </div>
 
@@ -62,7 +63,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
-//Trong Redux, dispatch là một hàm được cung cấp bởi Redux store để gửi các action đến các reducers.
-// Hàm dispatch nhận vào một action là một đối tượng JavaScript có thuộc tính type (loại hành động) và các thuộc tính khác chứa thông tin cần thiết cho hành động.
-// Khi một action được gửi thông qua hàm dispatch, Redux sẽ xác định reducers nào sẽ được gọi dựa trên type của action. Mỗi reducer sẽ xử lý các hành động tương ứng và thay đổi trạng thái của ứng dụng dựa trên hành động đó.
+export default connect(mapStateToProps, mapDispatchToProps)(HandBook); 

@@ -46,15 +46,10 @@ class App extends Component {
       <Fragment>
         <Router history={history}>
           {" "}
-          {/* dùng để lưu dữ liệu khi refresh lại trang web */}
           <div className="main-container">
-            {this.props.isLoggedIn && <Header />}{/* "Nếu đăng nhập thì lôi thanh Header vào " */} 
-            {/* Check Login , Nếu Logined thì render ra Header */}
-
             <div className="content-container">
                 <CustomScrollbars style = {{height : '100vh',with :'100%', border: '1px solid red'}} >
                   <Switch>
-                      {/* Route  path = 'Đường dẫn lấy từ path(ở trong untils/constant  và render ra component ở Container)' */}
                       <Route path={path.HOME} exact component={Home} />
                       <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} /> {/*userIsNotAuthenticated : nó như 1 middle ware => check quyền có được vào Login hay là không*/}
                       <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />

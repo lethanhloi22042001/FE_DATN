@@ -3,64 +3,83 @@
   width: 100%;
   // padding: 50px;
   // vì sao phải bọc thêm 1 div nữa , xem lại cái header
+
+  &.section-medical-facility {
+    background-color: #49ac9f;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  &.section-outstanding-doctor {
+    background-color: #1d9c8b;
+  }
+  &.section-about {
+    height: 500px !important;
+    border-top: 1px solid f5f5f5;
+    border-top: 1px solid f5f5f5;
+  }
   .section-container {
     padding: 15px 130px 10px 130px;
-      .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-          .title-section {
-          font-family: Montserrat ;
-          font-size: 24px ;
-          font-weight: 700 ;
-          line-height: 36px ;
-          padding: 15px 0px 5px ;
-            
-          }
-          .btn-section{
-            font-family: Montserrat ;
-            font-size: 24px ;
-            font-weight: 700 ;
-            line-height: 36px ;
-            padding: 15px 0px 5px ;
-
-
-            opacity: 0.7 !important;
-            cursor: pointer;
-              &:hover{
-                opacity: 1;
-                background-color: bisque;
-                border-radius: 6px;  
-              }
-            }
-
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      .title-section {
+        font-family: Montserrat;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 36px;
+        padding: 15px 0px 5px;
       }
-    .section-share{
-      &.section-specialty{
-        background-color: green;
-      }
+      .btn-section {
+        font-family: Montserrat;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 36px;
+        padding: 15px 0px 5px;
 
-      .section-body{
-
-        .specialty-customize {
-            .bg-img {
-              width: 278px !important;
-              height: 156px !important;
-              cursor: pointer;
-              padding-left: 5px;
-              padding-right: 5px;
-              border: 1px solid #eee;
-              background: url("../../assets/speciality/vg1.jpeg");
-            }
-            
-            .pictureT{
-              
-            }
-
+        opacity: 0.7 !important;
+        cursor: pointer;
+        &:hover {
+          opacity: 1;
+          background-color: bisque;
+          border-radius: 6px;
         }
       }
     }
-    .slick-slide{
+    .section-body {
+      .section-customize {
+        .bg-img {
+          width: 278px !important;
+          height: 156px !important;
+          cursor: pointer;
+          padding-left: 5px;
+          padding-right: 5px;
+          // border: 1px solid #eee;
+        }
+
+        .section-specialty {
+          background-image: url("../../assets/speciality/vg1.jpeg");
+        }
+        .section-medical-facility {
+          background-image: url("../../assets/medical-facility/vietDuc.jpeg");
+        }
+        .section-outstanding-doctor {
+          background-image: url("../../assets/outstanding-doctor/doctorss.jpeg");
+          width: 120px !important ;
+          height: 120px !important;
+          border-radius: 100rem !important;
+          object-fit: cover !important;
+          background-size: cover !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          margin: 0 auto;
+        }
+
+        .pictureT {
+        }
+      }
+    }
+    .slick-slide {
       width: 278px !important;
       height: 156px !important;
       background-color: bisque !important;
@@ -68,27 +87,73 @@
       margin-left: 20px !important;
     }
   }
-  
 }
-.slick-prev{
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 8px !important;
-    background-color: red !important;
-    opacity: 0.7 !important;
-    top: 76px !important;
-    z-index: 2;
+
+.section-outstanding-doctor {
+  .customize-border {
+    border: 1px solid red;
+    padding: 4px;
+    background-color: white;
+    width: 278px !important;
+    height: 245px !important;
   }
-  .slick-next {
-    width: 40px !important;
-    display: block ;
-    height: 40px !important;
-    background: red !important; 
-    top: 76px !important;
-    border-radius: 6px;
-  
-    opacity: 0.7;
-    &:hover{
-        opacity: 1;
+}
+
+.section-about{
+  padding: 0 100px;
+    .section-about-header {
+      padding: 20px 10px;
+      font-size: 22px;
+      font-weight: 600;
     }
+    .section-about-content {
+     display: flex;
+     gap: 15px;
+     width: 100%;
+     .content-left{
+        width: 60%;
+     }
+     .content-right{
+      width: 40%;
+       p{
+        text-align: justify;
+        font-style: italic;
+       }
+     }
+    }
+}
+
+.home-footer {
+  background-color: #64b9e5;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+  padding: 10px;
+  a {
+    text-decoration: unset;
   }
+}
+
+.slick-prev {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 8px !important;
+  background-color: red !important;
+  opacity: 0.7 !important;
+  top: 76px !important;
+  z-index: 2;
+}
+.slick-next {
+  width: 40px !important;
+  display: block;
+  height: 40px !important;
+  background: red !important;
+  top: 76px !important;
+  border-radius: 6px;
+
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+  }
+}
