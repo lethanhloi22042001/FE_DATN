@@ -10,9 +10,6 @@ import './Login.scss';
 
 import { handleLoginApi } from '../../services/userService';
 
-import { FormattedMessage } from 'react-intl';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserDoctor } from '@fortawesome/free-solid-svg-icons';
 
 
 class Login extends Component {
@@ -110,7 +107,7 @@ class Login extends Component {
                                 />
                                 <span onClick={()=>{
                                     this.handleHideShowPassword();}}>
-                                     <i class = { this.state.isShowHidePassWord ? 'fab fa-google-plus fa-beat-fade' : 'fab fa-facebook facebook'} ></i>
+                                     <i className = { this.state.isShowHidePassWord ? 'fab fa-google-plus fa-beat-fade' : 'fab fa-facebook facebook'} ></i>
                                 </span>
                             </div>
                             <div className='col-12' style={{color :'red'}}>

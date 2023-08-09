@@ -133,18 +133,18 @@ class UserManage extends Component {
                 <h1 className='text-center'>Manage users</h1>
                     <img src="images/search.png" alt="" />
                 <div className='addNewUser' onClick={ ()=>{this.handleAddUser()}}>
-                <a href="#" class="btn btn-primary btn-lg active btnAddUser" role="button" aria-pressed="true">Add New User</a>
+                <a href="/#" className="btn btn-primary btn-lg active btnAddUser" role="button" aria-pressed="true">Add New User</a>
                 </div>
                 <section className="table__body">
                 <table>
                     <thead>
                     <tr>
-                        <th> Id <span className="icon-arrow"><i class="fas fa-arrow-up"></i></span></th>
-                        <th> Email <span className="icon-arrow"><i class="fas fa-arrow-up"></i></span></th>
-                        <th> Firs tName <span className="icon-arrow"><i class="fas fa-arrow-up"></i></span></th>
-                        <th> Last Name <span className="icon-arrow"><i class="fas fa-arrow-up"></i></span></th>
-                        <th> Address <span className="icon-arrow"><i class="fas fa-arrow-up"></i></span></th>
-                        <th> Phone Number <span className="icon-arrow"><i class="fas fa-arrow-up"></i></span></th>
+                        <th> Id <span className="icon-arrow"><i className="fas fa-arrow-up"></i></span></th>
+                        <th> Email <span className="icon-arrow"><i className="fas fa-arrow-up"></i></span></th>
+                        <th> Firs tName <span className="icon-arrow"><i className="fas fa-arrow-up"></i></span></th>
+                        <th> Last Name <span className="icon-arrow"><i className="fas fa-arrow-up"></i></span></th>
+                        <th> Address <span className="icon-arrow"><i className="fas fa-arrow-up"></i></span></th>
+                        <th> Phone Number <span className="icon-arrow"><i className="fas fa-arrow-up"></i></span></th>
                         <th> Actions <span className="icon-arrow"></span></th>
                     </tr>
                     </thead>
@@ -153,19 +153,19 @@ class UserManage extends Component {
                         { arrUsers && arrUsers.map((item,index)=>{
                             console.log('check map',item,index);
                             return(
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.email}</td>
-                                    <td> {item.firstName}</td>
-                                    <td> {item.lastName} </td>
-                                    <td> {item.address} </td>
-                                    <td> <strong> {item.phonenumber} </strong></td>
-                                    <td className='btn-addDelete'>
+                                <tr key={item.id}>
+                                    <td  >{item.id}</td>
+                                    <td  >{item.email}</td>
+                                    <td  > {item.firstName}</td>
+                                    <td  > {item.lastName} </td>
+                                    <td  > {item.address} </td>
+                                    <td  > <strong> {item.phonenumber} </strong></td>
+                                    <td className='btn-addDelete'  >
                                         {/* <p className="status delivered">Delivered</p> */}
-                                        <button type="" className='status delivered asd1' onClick={()=>{
+                                        <button  className='status delivered asd1' onClick={()=>{
                                             this.handledelete(item) 
                                         }}>Deleted</button>
-                                        <button type="" className='status delivered asd' onClick={()=>{
+                                        <button className='status delivered asd' onClick={()=>{
                                             this.handdleEditUser(item);
                                         }}>Edit User</button>
                                     </td>

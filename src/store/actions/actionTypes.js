@@ -11,6 +11,22 @@ const actionTypes = Object.freeze({
     USER_LOGIN_SUCCESS : 'USER_LOGIN_SUCCESS',
     USER_LOGIN_FAIL : 'USER_LOGIN_FAIL',
     PROCESS_LOGOUT : 'PROCESS_LOGOUT',
+
+    //TEST
+    START : "XIN CHAO 550 ANH EM",
+    SUCCESS : "SUCCESS",
+    FAILED : "FAILED",
+
+     //Chức Danh - Position
+     POSITION_START: 'POSITION_START',
+     POSITION_SUCCESS : 'POSITION_SUCCESS',
+     POSITION_FAIL : 'POSITION_FAIL',
+
+
+     //ROLE- Vai Trò
+     ROLE_START: 'ROLE_START',
+     ROLE_SUCCESS : 'ROLE_SUCCESS',
+     ROLE_FAIL : 'ROLE_FAIL',
     
 })
 

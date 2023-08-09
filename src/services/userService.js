@@ -23,6 +23,11 @@ const updateUser = (userId) => {
 };
 
 
+const getAllCode = (role) => {
+  return axios.get(`/api/getallcode?type=${role}`);
+};
+
+
 
 
 export {
@@ -31,4 +36,5 @@ export {
   createNewUserService,
   deleteNewUserService,
   updateUser,
+  getAllCode,
 };

@@ -27,7 +27,7 @@ class Menu extends Component {
     render() {
         const { name, active, link, children, onClick, hasSubMenu, onLinkClick } = this.props;
         return (
-            <li className={"menu" + (hasSubMenu ? " has-sub-menu" : "") + ("") + (active ? " active" : "")}>
+            <li className={"menu " + (hasSubMenu ? " has-sub-menu" : "") + ("") + (active ? " active" : "")}>
                 {hasSubMenu ? (
                     <Fragment>
                         <span
@@ -244,3 +244,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default withRouterInnerRef(connect(mapStateToProps, mapDispatchToProps)(Navigator));
+ 

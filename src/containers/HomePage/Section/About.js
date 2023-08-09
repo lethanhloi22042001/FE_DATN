@@ -16,16 +16,17 @@ class About extends Component {
               height="400px"
               src="https://www.youtube.com/embed/FyDQljKtWnI"
               title="CÀ PHÊ KHỞI NGHIỆP VTV1 - BOOKINGCARE - HỆ THỐNG ĐẶT LỊCH KHÁM TRỰC TUYẾN"
-              FrameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              frameBorder="0"
+              allow= "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
           </div>
           <div className="content-right">
+                <p></p>
                 <p>
-                //Trong Redux, dispatch là một hàm được cung cấp bởi Redux store để gửi các action đến các reducers.
-                // Hàm dispatch nhận vào một action là một đối tượng JavaScript có thuộc tính type (loại hành động) và các thuộc tính khác chứa thông tin cần thiết cho hành động.
-                // Khi một action được gửi thông qua hàm dispatch, Redux sẽ xác định reducers nào sẽ được gọi dựa trên type của action. Mỗi reducer sẽ xử lý các hành động tương ứng và thay đổi trạng thái của ứng dụng dựa trên hành động đó.
+                  Trong Redux, dispatch là một hàm được cung cấp bởi Redux store để gửi các action đến các reducers.
+                   Hàm dispatch nhận vào một action là một đối tượng JavaScript có thuộc tính type  và các thuộc tính khác chứa thông tin cần thiết cho hành động.
+                   Khi một action được gửi thông qua hàm dispatch, Redux sẽ xác định reducers nào sẽ được gọi dựa trên type của action. Mỗi reducer sẽ xử lý các hành động tương ứng và thay đổi trạng thái của ứng dụng dựa trên hành động đó.
                 </p>
           </div>
         </div>

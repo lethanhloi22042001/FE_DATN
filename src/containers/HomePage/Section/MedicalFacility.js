@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import HomeHeader from "../HomeHeader";
+// import HomeHeader from "../HomeHeader";
 
 import Slider from "react-slick";
 

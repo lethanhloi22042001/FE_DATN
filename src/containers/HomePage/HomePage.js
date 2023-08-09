@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import HomeHeader from "./HomeHeader";
 // import Specialty from "./Section/Specialty";
@@ -9,7 +9,6 @@ import OutStandingDoctor from './Section/OutStandingDoctor'
 import HandBook from "./Section/HandBook";
 import About from "./Section/About";
 import HomeFooter from "./HomeFooter";
-import CustomScrollbars from "../../components/CustomScrollbars" ;
 import  './HomePage.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

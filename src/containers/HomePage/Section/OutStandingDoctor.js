@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import HomeHeader from "../HomeHeader";
+// import HomeHeader from "../HomeHeader";
 import Slider from "react-slick";
 
 class OutStandingDoctor extends Component {
@@ -20,7 +20,7 @@ class OutStandingDoctor extends Component {
                               <div className="outer-bg">
                                   <div className="bg-img section-outstanding-doctor"></div>
                               </div>
-                              <div class="position text-center">
+                              <div className="position text-center">
                                   <div className="pictureT">Giáo Sư 1</div>
                                   <div className="pictureT">Việt Đức</div>
                               </div>
@@ -32,7 +32,7 @@ class OutStandingDoctor extends Component {
                               <div className="outer-bg">
                                   <div className="bg-img section-outstanding-doctor"></div>
                               </div>
-                              <div class="position text-center">
+                              <div className="position text-center">
                                   <div className="pictureT">Giáo Sư 1</div>
                                   <div className="pictureT">Việt Đức</div>
                               </div>
@@ -44,7 +44,7 @@ class OutStandingDoctor extends Component {
                               <div className="outer-bg">
                                   <div className="bg-img section-outstanding-doctor"></div>
                               </div>
-                              <div class="position text-center">
+                              <div className="position text-center">
                                   <div className="pictureT">Giáo Sư 1</div>
                                   <div className="pictureT">Việt Đức</div>
                               </div>
@@ -55,7 +55,7 @@ class OutStandingDoctor extends Component {
                               <div className="outer-bg">
                                   <div className="bg-img section-outstanding-doctor"></div>
                               </div>
-                              <div class="position text-center">
+                              <div className="position text-center">
                                   <div className="pictureT">Giáo Sư 1</div>
                                   <div className="pictureT">Việt Đức</div>
                               </div>
@@ -66,7 +66,7 @@ class OutStandingDoctor extends Component {
                               <div className="outer-bg">
                                   <div className="bg-img section-outstanding-doctor"></div>
                               </div>
-                              <div class="position text-center">
+                              <div className="position text-center">
                                   <div className="pictureT">Giáo Sư 1</div>
                                   <div className="pictureT">Việt Đức</div>
                               </div>
@@ -78,7 +78,7 @@ class OutStandingDoctor extends Component {
                               <div className="outer-bg">
                                   <div className="bg-img section-outstanding-doctor"></div>
                               </div>
-                              <div class="position text-center">
+                              <div className="position text-center">
                                   <div className="pictureT">Giáo Sư 1</div>
                                   <div className="pictureT">Việt Đức</div>
                               </div>

@@ -6,7 +6,7 @@ class HomeFooter extends Component {
   render() {
     return (
       <div className="home-footer" style={{  height: '150px' }}>
-                <p>&copy; 2023 Lê Thanh Lợi <a href="">Xem Thêm Thông Tin</a></p>
+                <p>&copy; 2023 Lê Thanh Lợi <a href="a">Xem Thêm Thông Tin</a></p>
       </div>
     );
   }

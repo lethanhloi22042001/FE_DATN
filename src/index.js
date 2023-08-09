@@ -19,9 +19,6 @@ const renderApp = () => {
                 <App persistor={persistor}/>
             </IntlProviderWrapper>
         </Provider>,
-        //Đã config redux
-        // Đồng thời config chuyển đổi ngôn ngữ khi chúng ta đã khởi động App của chúng ta lên
-        // 
         document.getElementById('root')
     );
 };
