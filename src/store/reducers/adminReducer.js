@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 
 const initialState = { // cục dữ liệu
-  arr : [],
+  gender : [],
   role : [],
   position : [],
 };
@@ -15,7 +15,7 @@ const adminReducer = (state = initialState, action) => {
       };
     case actionTypes.SUCCESS:
       let copyState = {...state} ;  // tạo 1 mảng mới
-      copyState.arr = action.data ; // action.data: data thay đổi liên tục sau đó nhét dữ liệu vô mảng tạo trên
+      copyState.gender = action.data ; // action.data: data thay đổi liên tục sau đó nhét dữ liệu vô mảng tạo trên
       return {
         ...copyState,
       };
