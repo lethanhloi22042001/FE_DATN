@@ -61,6 +61,27 @@ const adminReducer = (state = initialState, action) => {
         return {
           ...state,
         };
+
+//CREATE USER REDUX
+case actionTypes.CREATE_START:
+        console.log('case 1');
+        return {
+          ...state,
+        };
+      case actionTypes.CREATE_SUCESS:
+          console.log('this is action of CreateUserRedux',action);
+          let state_create = {...state} ;
+          state_create = action ;
+        return {
+          ...state_create,
+        };
+      case actionTypes.CREATE_FAILED:
+        console.log("a3 Create");
+        return {
+          ...state,
+        };
+
+        
     default:
       return state;
   }

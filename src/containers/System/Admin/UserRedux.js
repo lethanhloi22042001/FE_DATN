@@ -28,6 +28,9 @@ class UserRedux extends Component {
       phonenumber: "",
       address: "",
       gender: "",
+      roleId: "",
+      position: "",
+      avatar: "",
     };
   }
 
@@ -47,6 +50,7 @@ class UserRedux extends Component {
     this.props.dispatchAdminReducer();
     this.props.dispatchAdminReducerPosition();
     this.props.dispatchAdminReducerRole();
+   
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -69,7 +73,7 @@ class UserRedux extends Component {
       let arrRole = this.props.genderReduxRole;
       this.setState({
         genderArrRole: this.props.genderReduxRole,
-        role: arrRole && arrRole.length > 0 ? arrRole[0].keyMap : "",
+        roleId: arrRole && arrRole.length > 0 ? arrRole[0].keyMap : "",
       });
     }
   }
@@ -106,8 +110,42 @@ class UserRedux extends Component {
     );
   };
 
+  isFill = ()=>{
+    let isValid = true ;
+    let arr = ['email','password','firstName','lastName' ,'address','phonenumber'] ;
+
+     for(let i= 0 ; i < arr.length ; i++){
+        if( !this.state[arr[i]] ){
+            isValid = false ;
+            console.log(arr[i]);
+            alert("vui long dien day du thong tin của " + arr[i]);
+            break ; 
+        }
+     }
+
+    return isValid ;
+}
+
   handleSaveUser = ()=>{
-    console.log('Check SubMit', this.state);
+    let check = this.isFill();
+    if(check === true){
+      // this.props.createNewUserModleUser(this.state);
+      this.props.dispatchAdminReducerCreateUser(this.state);
+      this.props.dispatchAdminReducerCreateUser({
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        address: this.state.address,
+        phonenumber: this.state.phonenumber,
+        gender: this.state.gender,
+        roleId: this.state.roleId,
+        positionId: this.state.position,
+        avatar: this.state.avatar
+      });
+    }
+
+    
   }
   render() {
     let genderArrnew = this.state.genderArr;
@@ -120,6 +158,7 @@ class UserRedux extends Component {
       this.state;
 
     return (
+
       <div className="user-redux-container">
         <div className="title">Manage User using Redux</div>
         <div className="user-redux-body">
@@ -236,12 +275,12 @@ class UserRedux extends Component {
                   <label>
                     <FormattedMessage
                       id="manage-user.position"
-                      onChange={(event) => {
-                        this.onChangeInput(event, "position");
-                      }}
+                      
                     />
                   </label>
-                  <select className="form-control">
+                  <select className="form-control" onChange={(event) => {
+                        this.onChangeInput(event, "position");
+                      }}>
                     {genderArrnewPosition &&
                       genderArrnewPosition.length > 0 &&
                       genderArrnewPosition.map((item, i) => {
@@ -262,16 +301,15 @@ class UserRedux extends Component {
                   <label>
                     <FormattedMessage
                       id="manage-user.role"
-                      onChange={(event) => {
-                        this.onChangeInput(event, "role");
-                      }}
+                     
                     />
                   </label>
-                  <select className="form-control">
+                  <select className="form-control"  onChange={(event) => {
+                        this.onChangeInput(event, "roleId");
+                      }}>
                     {genderArrnewRole &&
                       genderArrnewRole.length > 0 &&
                       genderArrnewRole.map((item, i) => {
-                        console.log('this is item',item);
                         return (
                           <option key={i} value={item.keyMap}>
                             {" "}
@@ -334,6 +372,7 @@ class UserRedux extends Component {
           />
         )}
       </div>
+
     );
   }
 }
@@ -348,6 +387,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchAdminReducerRole: () => {
       dispatch(actions.startDoingRole());
+    },
+    dispatchAdminReducerCreateUser: (data) => {
+      dispatch(actions.createUserRedux(data));
     },
   };
 };

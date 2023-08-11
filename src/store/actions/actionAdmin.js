@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import {getAllCode} from '../../services/userService'
+import {getAllCode,createNewUserService} from '../../services/userService'
 
 // export const startDoing = () => ({
 //     type: actionTypes.START,
@@ -82,4 +82,46 @@ export const successRole = (data) => ({
 
 export const failedRole = ()=>({
     type : actionTypes.ROLE_FAIL,
+})
+
+
+
+export const createUserRedux = (userId) => {
+   
+    return async (dispatch, getState) =>{
+          try {
+            let res = await createNewUserService(userId) ;
+            if( res && res.errCode === 0 ){
+                dispatch(createUserReduxSucess());
+            }else{
+                dispatch(createUserReduxFailed());
+            }
+        } catch (errCode) {
+            dispatch(createUserReduxFailed());
+            console.log('saveUserFailed',errCode);
+        }
+        
+};
+
+// return async (dispatch, getState) => {
+//     try {
+//         let res = await createNewUserService(userId)
+//         if (res && res.errCode === 0) {
+//             dispatch(createUserReduxSucess())
+//         } else {
+//             dispatch(createUserReduxFailed())
+//         }
+//     } catch (e) {
+//         dispatch(createUserReduxFailed())
+//         console.log('saveUserFailed error', e)
+//     }
+// }
+}
+
+export const createUserReduxSucess = () => ({
+    type: actionTypes.CREATE_SUCESS,
+});
+
+export const createUserReduxFailed  = ()=>({
+    type : actionTypes.CREATE_FAILED,
 })

@@ -27,6 +27,10 @@ const actionTypes = Object.freeze({
      ROLE_START: 'ROLE_START',
      ROLE_SUCCESS : 'ROLE_SUCCESS',
      ROLE_FAIL : 'ROLE_FAIL',
+     
+     CREATE_START : "CREATE_START",
+     CREATE_SUCESS : "CREATE_SUCESS",
+     CREATE_FAILED : "CREATE_FAILED",
     
 })
 
