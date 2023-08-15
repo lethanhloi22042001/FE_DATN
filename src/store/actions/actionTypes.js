@@ -32,19 +32,19 @@ const actionTypes = Object.freeze({
      CREATE_SUCESS : "CREATE_SUCESS",
      CREATE_FAILED : "CREATE_FAILED",
 
-    //GET ALLL USER- Vai Trò
+    //GET ALLL USER- Lấy Tất Cả User
     GETALL_START : "GETALL_START",
     GETALL_SUCESS : "GETALL_SUCESS",
     GETALL_FAILED : "GETALL_FAILED",
 
 
-    //Delete USER- Vai Trò
+    //Delete USER- XOÁ
     DELETE_START : "DELETE_START",
     DELETE_SUCCESS : "DELETE_SUCCESS",
     DELETE_FAIL : "DELETE_FAIL",
 
 
-    //Delete USER- Vai Trò
+    //UPDATE USER- Cập Nhật
     UPDATE_START : "UPDATE_START",
     UPDATE_SUCCESS : "UPDATE_SUCCESS",
     UPDATE_FAIL : "UPDATE_FAIL",

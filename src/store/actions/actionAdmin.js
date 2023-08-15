@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import {getAllCode,createNewUserService,getAllUsers,deleteNewUserService} from '../../services/userService'
+import {getAllCode,createNewUserService,getAllUsers,deleteNewUserService,updateUser} from '../../services/userService'
 import { toast } from "react-toastify";
 // export const startDoing = () => ({
 //     type: actionTypes.START,
@@ -177,10 +177,12 @@ export const deleteUserReduxUserReduxFailed  = ()=>({
 // --------------UPDATE USER--------------
 
 export const updateUserRedux = (data) => {
+    console.log('da ta cua updateUserRedux',data);
     return async (dispatch, getState) =>{
           try {
-             let dispat =  await deleteNewUserService(data) ;
+             let dispat =  await updateUser(data) ;
             if( dispat && dispat.errCode === 0 ){
+                toast.success("Cập Nhật Thành Công") ; 
                 dispatch(updateUserReduxUserReduxSucess());
                 dispatch(getAllUserRedux());
             }else{
@@ -196,6 +198,7 @@ export const updateUserRedux = (data) => {
 
 export const updateUserReduxUserReduxSucess = () => ({
     type: actionTypes.UPDATE_SUCCESS,
+    // data : data,
 });
 
 export const updateUserReduxUserReduxFailed  = ()=>({

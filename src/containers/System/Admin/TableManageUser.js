@@ -47,6 +47,10 @@ class TableManageUser extends Component {
         alert('da xoa thanh cong');
         this.props.dispatchDeleteUserAdminReducer(dataId);
     };
+    handdleEditUser(data){
+        alert('da lay thanh cong');
+        this.props.handleEditUserFromParentKey(data)
+    }
 
     render() {
         let arrLoadDataRender = this.state.arrLoadData ;
@@ -117,6 +121,9 @@ const mapDispatchToProps = dispatch => {
           },
         dispatchDeleteUserAdminReducer: (data) => {
             dispatch(actions.deleteUserRedux(data));
+          },
+        dispatchUpdateUserAdminReducer: (data) => {
+            dispatch(actions.updateUserRedux(data));
           },
     };
 };

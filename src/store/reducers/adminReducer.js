@@ -88,7 +88,6 @@ case actionTypes.GETALL_START:
           ...state,
         };
 case actionTypes.GETALL_SUCESS:
-          console.log('this is action of GETALL CreateUserRedux',action);
           let state_getALL = {...state} ;
           state_getALL.arrLoadData = action.data ;
         return {
