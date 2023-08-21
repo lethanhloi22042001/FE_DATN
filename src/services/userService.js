@@ -26,10 +26,13 @@ const updateUser = (userId) => {
 const getAllCode = (role) => {
   return axios.get(`/api/getallcode?type=${role}`);
 };
-
-
-
-
+const getTopDoctorService = (limit) => {
+  return axios.get(`/api/top-doctor-home?limit=${limit}`)
+};
+// Lấy Toàn Bộ Bác Sĩ
+const getAllDoctor = () => {
+  return axios.get(`/api/getAllDoctor`)
+};
 
 
 
@@ -40,4 +43,7 @@ export {
   deleteNewUserService,
   updateUser,
   getAllCode,
+  getTopDoctorService,
+  getAllDoctor,
+
 };

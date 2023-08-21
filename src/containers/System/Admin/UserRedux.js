@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import { getAllCode } from "../../../services/userService";
-import { LANGUAGES ,CRUD_ACTIONS} from "../../../utils";
+import { LANGUAGES ,CRUD_ACTIONS,CommonUtils} from "../../../utils";
 // import * as actions from '../../../store/actions'
 import * as actions from "../../../store/actions";
 import "./UserRedux.scss";
@@ -19,7 +18,7 @@ class UserRedux extends Component {
       genderArr: [],
       genderArrPosition: [],
       genderArrRole: [],
-      previewImgURL: "",
+      previewImgURL: "", // dùng với Lightbox để hiển thị ra xem ảnh trước 
       isOpen: false,
 
       email: "",
@@ -31,27 +30,14 @@ class UserRedux extends Component {
       gender: "",
       roleId: "",
       position: "",
-      avatar: "",
+      avatar: "", // ảnh khi post
 
       action : '',
       userEditId : '',
-
     };
   }
 
   async componentDidMount() {
-    // this.props.reduxTest();
-    // try {
-    //   let getDBBE = await getAllCode('GENDER') ;
-    //     if(getDBBE && getDBBE.errCode === 0){
-    //       this.setState({
-    //         genderArr : getDBBE.data
-    //       });
-    //     }
-
-    // } catch (error) {
-    //     console.log(error);
-    // }
     this.props.dispatchAdminReducer();
     this.props.dispatchAdminReducerPosition();
     this.props.dispatchAdminReducerRole();
@@ -97,24 +83,27 @@ class UserRedux extends Component {
         position: arrPosition && arrPosition.length > 0 ? arrPosition[0].keyMap : "",
         avatar: "",
 
-        // actions: CRUD_ACTIONS.CREATE
-        action: CRUD_ACTIONS.CREATE
+
+        action: CRUD_ACTIONS.CREATE,
+        previewImgURL : '',
+
       });
     }
   }
 
-  handleOnchangeIMG = (event) => {
+  handleOnchangeIMG = async(event) => {
     let data = event.target.files;
     let file = data[0];
     if (file) {
-      let objectURL = URL.createObjectURL(file);
+      let base64 = await CommonUtils.getBase64(file);
+      let objectURL = URL.createObjectURL(file); // objectURL để chuyển ảnh thành đường link ==> giúp thấy hình ảnh hiện lên trên màn hình
       this.setState({
-        previewImgURL: objectURL,
-        avatar: file,
+        previewImgURL: objectURL, 
+        avatar: base64, //Chuyển dữ liệu ảnh(tập tin) sang dạng base64 mới đẩy xuống BE được (và dưới BE đang kiểu BLOB nên kiểu avatar tiếp tục bị đổi thành dạng BUFFER)
       });
     }
   };
-
+  // ở thẻ div=> khi click thì dùng thư viện 
   openPreviewImgURL = () => {
     if (!this.state.previewImgURL) return; // Nếu bằng rỗng thì return
     this.setState({
@@ -150,13 +139,16 @@ class UserRedux extends Component {
 
     return isValid ;
 }
-
+  //Hàm này dùng để kéo dữ liệu từ BE => setState để 
   handleEditUserFromParent = (data)=>{
-      console.log('this is data of Parent',data);
+      let imageBase64 = '';
+      if(data.image){
+        //                     data.image(đang là kiểu BLOB) - mã hoá sang base64 -> sau đó toString sang binary
+        imageBase64 = new Buffer(data.image ,"base64").toString('binary');
+      }
       this.setState({
             email: data.email,
-            password: "HardCode",
-            // password: data.password,
+            password: "HardCode", 
             firstName: data.firstName,
             lastName: data.lastName,
             phonenumber: data.phonenumber,
@@ -165,13 +157,10 @@ class UserRedux extends Component {
             roleId: data.roleId,
             position: data.positionId,
             avatar: data.avatar,
-
+            previewImgURL : imageBase64,
             action : CRUD_ACTIONS.EDIT,
             userEditId : data.id ,
-
-          },()=>{console.log('a o day ne ',this.state);});
-          
-         
+          }); 
   }
   
 
@@ -394,13 +383,14 @@ class UserRedux extends Component {
                           <option>...</option>
                         </select>
                       </div>
-
+                              {/* Cái này Là NÚT BẤM  SAVE or UPDATE */}
                       <div className="col-3">
                         <label>
                           <FormattedMessage id="manage-user.image" />
                         </label>
                         <div className="preview-img-container">
                           <div className="upload-btn-wrapper">
+
                             <input
                               type="file"
                               id="previewImgURL"
@@ -409,10 +399,14 @@ class UserRedux extends Component {
                                 this.handleOnchangeIMG(event);
                               }}
                             />
+                                  {/* Cái này htmlFor="previewImgURL" - Hiển thị hình ảnh lên: Liên kết label với phần tử <input> thông qua cùng một ID, khi người dùng nhấp vào label thì sẽ kích hoạt sự kiện chọn tập tin. */}
                             <label className="label-upload" htmlFor="previewImgURL">
                               <FormattedMessage id="manage-user.postImg" />
                               <i className="fas fa-upload"></i>
                             </label>
+
+                                  {/* Cái này backgroundImage `url(${this.state.previewImgURL}): Dùng để hiển thị ảnh */}
+                                  {/* Cái này onClick={() => {this.openPreviewImgURL();}}: Dùng kèm với thư viện LightBox để click ảnh lên */}
                             <div
                               className="preview-img"
                               style={{
@@ -422,17 +416,18 @@ class UserRedux extends Component {
                                 this.openPreviewImgURL();
                               }}
                             ></div>
+
                           </div>
                         </div>
                       </div>
-
+                                  {/* Cái này Là NÚT BẤM  SAVE or UPDATE */}
                       <div className="col-12 my-3">
                         <button className={this.state.action === CRUD_ACTIONS.EDIT ? "btn btn-warning" : "btn btn-primary"} onClick={ ()=>{ this.handleSaveUser()}}>
-
                           {this.state.action === CRUD_ACTIONS.EDIT ? <FormattedMessage id="manage-user.edit" /> : <FormattedMessage id="manage-user.save" />} 
                         </button>
                       </div>
                       <div className="col-12 mb-5"></div>
+
                     </div>
                   </div>
                 </div>

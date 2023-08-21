@@ -1,9 +1,10 @@
 import actionTypes from './actionTypes';
-import {getAllCode,createNewUserService,getAllUsers,deleteNewUserService,updateUser} from '../../services/userService'
-import { toast } from "react-toastify";
+import {getAllCode,createNewUserService,getAllUsers,deleteNewUserService,updateUser,getTopDoctorService,getAllDoctor} from '../../services/userService'
+import { toast } from "react-toastify"; // toast : thư viện dùng để hiện thị thông báo giống như alert
 // export const startDoing = () => ({
 //     type: actionTypes.START,
 // });
+
 export const startDoing = () => {
     return async (dispatch,getState)=>{
         try {
@@ -121,8 +122,12 @@ export const getAllUserRedux = () => {
     return async (dispatch, getState) =>{
           try {
             let res = await getAllUsers('ALL') ;
+            let test = await getTopDoctorService(3);
+            console.log('Test API DOCTOR',test);
             if( res && res.errCode === 0 ){
                 dispatch(getAllUserReduxUserReduxSucess(res.users.reverse()));
+
+
             }else{
                 dispatch(getAllUserReduxUserReduxFailed());
             }
@@ -204,4 +209,65 @@ export const updateUserReduxUserReduxSucess = () => ({
 export const updateUserReduxUserReduxFailed  = ()=>({
     type : actionTypes.UPDATE_FAIL,
 })
+
+
+// --------------GET ALL-ONE DOCTOR--------------
+
+export const getDoctorRedux = () => {
+    console.log('fire thanh cong');
+    return async (dispatch, getState) =>{
+        try {
+             let dispat =  await getTopDoctorService('10') ;
+            if( dispat && dispat.errCode === 0 ){
+                toast.success("Lấy Bác Sĩ Thành Công") ; 
+                dispatch(getDoctorReduxSucess(dispat.data));
+            }else{
+                dispatch(getDoctorReduxFailed());
+                }
+        } catch (errCode) {
+            dispatch(getDoctorReduxFailed());
+            console.log('saveUserFailed',errCode);
+        }
+    };
+}
+
+export const getDoctorReduxSucess = (data) => ({
+    type: actionTypes.GETDOCTOR_SUCCESS,
+    data:data 
+});
+
+export const getDoctorReduxFailed  = ()=>({
+    type : actionTypes.GETDOCTOR_FAIL,
+})
+
+
+// --------------GET ALL DOCTOR--------------
+
+export const getAllDoctorRedux = () => {
+    return async (dispatch, getState) =>{
+        try {
+             let Arrdata =  await getAllDoctor() ;
+            if( Arrdata && Arrdata.errCode === 0 ){
+                toast.success("Lấy Toàn Bộ Bác Sĩ Thành Công") ; 
+                dispatch(getAllDoctorReduxSucess(Arrdata.data));
+            }else{
+                dispatch(getAllDoctorReduxFailed());
+                }
+        } catch (errCode) {
+            dispatch(getAllDoctorReduxFailed());
+            console.log('saveUserFailed',errCode);
+        }
+    };
+}
+
+export const getAllDoctorReduxSucess = (data) => ({
+    type: actionTypes.GETALLDOCTOR_SUCCESS,
+    data:data 
+});
+
+export const getAllDoctorReduxFailed  = ()=>({
+    type : actionTypes.GETALLDOCTOR_FAIL,
+})
+
+
 

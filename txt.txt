@@ -1,3 +1,7 @@
+npm install --save react-markdown-editor-lite@1.3.0
+npm install --save markdown-it@12.1.0
+
+
 // Vì đã có cấu trúc sẵn
 1. chạy npm i trước để cài gói hàng
 
@@ -20,3 +24,30 @@ const mapDispatchToProps = dispatch => {
 };
 
 ==> Phải tìm hiểu lifeCycle của React 
+
+// Đăng ảnh trong file
+//ở System/Admin/UserRedux
+ <div className="col-3">
+                        <label>
+                          <FormattedMessage id="manage-user.image" />
+                        </label>
+                        <div className="preview-img-container">
+                          <div className="upload-btn-wrapper">
+
+                            <input type="file" id="previewImgURL" hidden onChange={(event) => { this.handleOnchangeIMG(event); }} />
+                                  {/* Cái này htmlFor="previewImgURL" - Hiển thị hình ảnh lên: Liên kết label với phần tử <input> thông qua cùng một ID, khi người dùng nhấp vào label thì sẽ kích hoạt sự kiện chọn tập tin. */}
+                            <label className="label-upload" htmlFor="previewImgURL">
+                              <FormattedMessage id="manage-user.postImg" />
+                              <i className="fas fa-upload"></i>
+                            </label>
+
+                                  {/* Cái này backgroundImage `url(${this.state.previewImgURL}): Dùng để hiển thị ảnh */}
+                                  {/* Cái này onClick={() => {this.openPreviewImgURL();}}: Dùng kèm với thư viện LightBox để click ảnh lên */}
+                            <div
+                              className="preview-img"
+                              style={{ backgroundImage: `url(${this.state.previewImgURL})`, }}
+                              onClick={() => { this.openPreviewImgURL(); }}
+                            ></div>
+<input>: Được sử dụng để chọn tệp ảnh từ máy tính của người dùng. Sau khi chọn, nó trích xuất thông tin ảnh, chuyển đổi nó thành dạng Base64 và cập nhật trạng thái React.
+<label>: Được liên kết với <input> thông qua thuộc tính htmlFor, tạo một vùng nhấp chuột ảo cho việc chọn tệp ảnh.
+<div>: Dùng để hiển thị trước hình ảnh đã chọn. Khi người dùng nhấp vào, hình ảnh sẽ được mở ra trong thư viện Lightbox để phóng to.

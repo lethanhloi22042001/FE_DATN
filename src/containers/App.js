@@ -57,6 +57,7 @@ class App extends Component {
                     </Switch>
                   </CustomScrollbars>
             </div>
+                {/* Toast là cái hiển thị thông báo như Alert */}
                 <ToastContainer
                     position="top-center"
                     autoClose={5000}

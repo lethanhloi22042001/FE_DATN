@@ -63,7 +63,9 @@
       "outstanding-doctor": "Bác sĩ nổi bậc tuần qua",
       "learn-more": "XEM THÊM",
       "specialty-popular": "Chuyên khoa phổ biến",
-      "medical-facility": "Cơ sở y tế nổi bật"
+      "medical-facility": "Cơ sở y tế nổi bật" ,
+      "out-standing-doctor" : "Bác sĩ nổi bật tuần qua",
+      "more-infomation" :   "Xem Thêm"
   },
   "manage-schedule": {
       "title": "Quản lý kế hoạch khám bệnh của bác sĩ",

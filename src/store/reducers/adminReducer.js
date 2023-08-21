@@ -5,6 +5,9 @@ const initialState = { // cục dữ liệu
   role : [],
   position : [],
   arrLoadData : [],
+  bacsi : [],
+  doctorAllArr : [],
+
 
 };
 
@@ -115,7 +118,47 @@ case actionTypes.DELETE_FAIL:
         return {
           ...state,
         };
-        
+
+/////============GET DOCTOR
+case actionTypes.GETDOCTOR_START:
+        console.log('GETDOCTOR_START 1');
+        return {
+          ...state,
+        };
+case actionTypes.GETDOCTOR_SUCCESS:
+        console.log('this is action of GETDOCTOR_SUCCESS',action);
+        let state_getDoctor = {...state} ;
+        state_getDoctor.bacsi = action.data ;
+        return {
+          ...state_getDoctor,
+        };
+case actionTypes.GETDOCTOR_FAIL:
+        console.log("GETDOCTOR_FAIL a3");
+        return {
+          ...state,
+        };
+
+
+/////============GET ALL DOCTOR
+case actionTypes.GETALLDOCTOR_START:
+        console.log('GET ALL DOCTOR');
+        return {
+          ...state,
+        };
+case actionTypes.GETALLDOCTOR_SUCCESS:
+        let state_getAllDoctor = {...state} ;
+        state_getAllDoctor.doctorAllArr = action.data ;
+        return {
+          ...state_getAllDoctor,
+        };
+case actionTypes.GETALLDOCTOR_FAIL:
+        console.log("GET_ALL_DOCTOR FAIL");
+        return {
+          ...state,
+        };
+
+
+
     default:
       return state;
   }

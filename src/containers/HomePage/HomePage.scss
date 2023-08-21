@@ -64,7 +64,7 @@
           background-image: url("../../assets/medical-facility/vietDuc.jpeg");
         }
         .section-outstanding-doctor {
-          background-image: url("../../assets/outstanding-doctor/doctorss.jpeg");
+          // background-image: url("../../assets/outstanding-doctor/doctorss.jpeg");
           width: 120px !important ;
           height: 120px !important;
           border-radius: 100rem !important;
@@ -73,6 +73,7 @@
           background-repeat: no-repeat !important;
           background-position: center !important;
           margin: 0 auto;
+          margin-top: 20px;
         }
 
         .pictureT {
@@ -87,10 +88,16 @@
       margin-left: 20px !important;
     }
   }
+  
+  
 }
 
 .section-outstanding-doctor {
+
   .customize-border {
+    .outer-bg{
+      padding: 20px;
+    }
     // 
     padding: 4px;
     background-color: white;
@@ -157,3 +164,7 @@
     opacity: 1;
   }
 }
+.slick-disabled {
+  display: none !important;
+}
+
