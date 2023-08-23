@@ -17,12 +17,13 @@ class OutStandingDoctor extends Component {
   }
   componentDidMount(){
     this.props.dispatchGetDoctorRedux();
+    console.log('this is dotor Arr',this.state.doctor);
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.ReduxDoctorArr !== this.props.ReduxDoctorArr) {
       let DoctorArr = this.props.ReduxDoctorArr;
       this.setState({
-        doctor: this.props.ReduxDoctorArr,
+        doctor: DoctorArr
         // gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : "",
       },()=>{
         console.log('this is dotor Arr',this.state.doctor);
@@ -55,8 +56,8 @@ class OutStandingDoctor extends Component {
               if(item.image){
               imageBase64 = new Buffer(item.image ,"base64").toString('binary');
               }
+              console.log('Hello ae');
               return(
-
                       <div className="section-customize" key ={index}>
                           <div className="customize-border">
                               <div className="outer-bg">
@@ -70,7 +71,7 @@ class OutStandingDoctor extends Component {
                          </div> 
               )
             })}
-            </Slider>
+            </Slider> 
 
             
           </div>
@@ -85,7 +86,7 @@ const mapStateToProps = (state) => {
   return {
     language : state.app.language,
     isLoggedIn: state.user.isLoggedIn,
-    ReduxDoctorArr: state.adminReducerRoot.doctorArr,
+    ReduxDoctorArr: state.adminReducerRoot.doctorArrOutStandingDoctor,
   };
 };
 

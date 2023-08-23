@@ -5,7 +5,7 @@ const initialState = { // cục dữ liệu
   role : [],
   position : [],
   arrLoadData : [],
-  bacsi : [],
+  doctorArrOutStandingDoctor : [],
   doctorAllArr : [],
   detail: [],
 
@@ -129,7 +129,7 @@ case actionTypes.GETDOCTOR_START:
 case actionTypes.GETDOCTOR_SUCCESS:
         console.log('this is action of GETDOCTOR_SUCCESS',action);
         let state_getDoctor = {...state} ;
-        state_getDoctor.bacsi = action.data ;
+        state_getDoctor.doctorArrOutStandingDoctor = action.data ;
         return {
           ...state_getDoctor,
         };
