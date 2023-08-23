@@ -7,6 +7,7 @@ const initialState = { // cục dữ liệu
   arrLoadData : [],
   bacsi : [],
   doctorAllArr : [],
+  detail: [],
 
 
 };
@@ -157,6 +158,22 @@ case actionTypes.GETALLDOCTOR_FAIL:
           ...state,
         };
 
+/////============Save Infor Detail DOCTOR
+// case actionTypes.SAVEDETAILDOCTOR_START:
+//         console.log('GET ALL DOCTOR');
+//         return {
+//           ...state,
+//         };
+// case actionTypes.SAVEDETAILDOCTOR_SUCCESS:
+//         let state_saveInfDoctor = {...state} ;
+//         return {
+//           ...state_saveInfDoctor,
+//         };
+// case actionTypes.SAVEDETAILDOCTOR_FAIL:
+//         console.log("GET_DETAIL_DOCTOR FAIL ae");
+//         return {
+//           ...state,
+//         };
 
 
     default:

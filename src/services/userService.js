@@ -31,7 +31,12 @@ const getTopDoctorService = (limit) => {
 };
 // Lấy Toàn Bộ Bác Sĩ
 const getAllDoctor = () => {
-  return axios.get(`/api/getAllDoctor`)
+  return axios.get(`/api/getAllDoctor`);
+};
+
+// Lưu Thông Tin Chi Tiết Một Bác Sĩ
+const SaveInfoDoctor = (data) => {
+  return axios.post(`/api/save-info-doctor`,data);
 };
 
 
@@ -45,5 +50,6 @@ export {
   getAllCode,
   getTopDoctorService,
   getAllDoctor,
+  SaveInfoDoctor
 
 };

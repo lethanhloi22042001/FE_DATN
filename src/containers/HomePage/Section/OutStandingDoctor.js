@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import HomeHeader from "../HomeHeader";
+import HomeHeader from "../HomeHeader";
 import Slider from "react-slick";
 import * as actions from "../../../store/actions" ;
 import { LANGUAGES} from "../../../utils";
@@ -56,6 +56,7 @@ class OutStandingDoctor extends Component {
               imageBase64 = new Buffer(item.image ,"base64").toString('binary');
               }
               return(
+
                       <div className="section-customize" key ={index}>
                           <div className="customize-border">
                               <div className="outer-bg">
@@ -66,7 +67,7 @@ class OutStandingDoctor extends Component {
                                   <div className="pictureT">Việt Đức</div>
                               </div>
                           </div>
-                        </div> 
+                         </div> 
               )
             })}
             </Slider>

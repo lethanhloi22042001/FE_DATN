@@ -59,6 +59,8 @@ class TableManageUser extends Component {
         if (prevProps.arrLoadDataStatetoProp !== this.props.arrLoadDataStatetoProp) {
           this.setState({
             arrLoadData: this.props.arrLoadDataStatetoProp,
+          },()=>{
+            console.log('this is arrLoadData Of TableManage',this.state.arrLoadData);
           })
         }
     }

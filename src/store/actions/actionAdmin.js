@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import {getAllCode,createNewUserService,getAllUsers,deleteNewUserService,updateUser,getTopDoctorService,getAllDoctor} from '../../services/userService'
+import {getAllCode,createNewUserService,getAllUsers,deleteNewUserService,updateUser,getTopDoctorService,getAllDoctor,SaveInfoDoctor} from '../../services/userService'
 import { toast } from "react-toastify"; // toast : thư viện dùng để hiện thị thông báo giống như alert
 // export const startDoing = () => ({
 //     type: actionTypes.START,
@@ -267,6 +267,36 @@ export const getAllDoctorReduxSucess = (data) => ({
 
 export const getAllDoctorReduxFailed  = ()=>({
     type : actionTypes.GETALLDOCTOR_FAIL,
+})
+
+
+
+// SAVE DETAIL A DOCTOR
+export const SaveDetailDoctorRedux = (data) => {
+    console.log(data);
+    return async (dispatch, getState) =>{
+        try {
+             let Arrdata =  await SaveInfoDoctor(data);
+             console.log('arrdata ne',Arrdata);
+            if( Arrdata && Arrdata.errCode === 0 ){
+                toast.success("Lưu Thông Tin Bác Sĩ Thành Công") ; 
+                dispatch(SaveDetailDoctorReduxSucess());
+            }else{
+                dispatch(SaveDetailDoctorReduxFailed());
+                }
+        } catch (errCode) {
+            dispatch(SaveDetailDoctorReduxFailed());
+            console.log('SaveDetailDoctorReduxFailed',errCode);
+        }
+    };
+}
+
+export const SaveDetailDoctorReduxSucess = () => ({
+    type: actionTypes.SAVEDETAILDOCTOR_SUCCESS,
+});
+
+export const SaveDetailDoctorReduxFailed  = ()=>({
+    type : actionTypes.SAVEDETAILDOCTOR_FAIL,
 })
 
 
