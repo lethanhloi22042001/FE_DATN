@@ -8,6 +8,8 @@ const initialState = { // cục dữ liệu
   doctorArrOutStandingDoctor : [],
   doctorAllArr : [],
   detail: [],
+  allScheduleTime : [],
+
 
 
 };
@@ -158,22 +160,19 @@ case actionTypes.GETALLDOCTOR_FAIL:
           ...state,
         };
 
-/////============Save Infor Detail DOCTOR
-// case actionTypes.SAVEDETAILDOCTOR_START:
-//         console.log('GET ALL DOCTOR');
-//         return {
-//           ...state,
-//         };
-// case actionTypes.SAVEDETAILDOCTOR_SUCCESS:
-//         let state_saveInfDoctor = {...state} ;
-//         return {
-//           ...state_saveInfDoctor,
-//         };
-// case actionTypes.SAVEDETAILDOCTOR_FAIL:
-//         console.log("GET_DETAIL_DOCTOR FAIL ae");
-//         return {
-//           ...state,
-//         };
+///============Get All Time Schedule Doctor
+ 
+case actionTypes.FETCH_ALLCODE_SCHEDUAL_HOURS_SUCCESS:
+        let copyStates = {...state} ;
+        copyStates.allScheduleTime = action.dataTime ;
+        return {
+          ...copyStates,
+        };
+case actionTypes.FETCH_ALLCODE_SCHEDUAL_HOURS_FAIL:
+        console.log("FETCH_ALLCODE_SCHEDUAL_HOURS_FAIL");
+        return {
+          ...state,
+        };
 
 
     default:

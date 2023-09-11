@@ -41,6 +41,20 @@ const SaveInfoDoctor = (data) => {
 
 
 
+//Láy Tin Chi Tiết Một Bác Sĩ + Thông Tin MarkDown
+
+const getDetailInfoDoctor = (data) => {
+  return axios.get(`/api/get-detail-doctor-by-id?id=${data}`);
+};
+
+//Láy Tin Chi Tiết Một Bác Sĩ + Thông Tin MarkDown
+
+const getSelectedOption = (dataId) => {
+  return axios.get(`/api/getSelectedOption`,dataId);
+};
+
+
+
 export {
   handleLoginApi,
   getAllUsers,
@@ -50,6 +64,7 @@ export {
   getAllCode,
   getTopDoctorService,
   getAllDoctor,
-  SaveInfoDoctor
+  SaveInfoDoctor,
+  getDetailInfoDoctor,
 
 };

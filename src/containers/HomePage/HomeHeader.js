@@ -4,11 +4,16 @@ import "./HomeHeader.scss";
 import { FormattedMessage } from "react-intl"; // Thư viện : international language (react-intl)
 import { LANGUAGES } from "../../utils/constant";
 import { changeLanguageApp } from "../../store/actions";
+import { withRouter } from "react-router";
 
 class HomeHeader extends Component {
   changeLanguage = (language) => {
     this.props.changeLanguageAppRedux(language);
   };
+
+  handleReturnHome = ()=>{
+    this.props.history.push(`/home`);
+  }
   render() {
     return (
       <React.Fragment>
@@ -16,7 +21,7 @@ class HomeHeader extends Component {
           <div className="home-header-content">
             <div className="left-content">
               <i className="fas fa-bars"></i>
-              <img
+              <img onClick={ ()=>{this.handleReturnHome()}}
                 className="left-content_img"
                 src="https://bookingcare.vn/assets/icon/bookingcare-2020.svg"
                 alt="example"
@@ -88,84 +93,86 @@ class HomeHeader extends Component {
           </div>
         </div>
         {/* {Space Fragment} */}
-
-        <div className="home-header-banner">
-          <div className="content-up">
-            <div className="title">
-              <div className="title-text">
-                <b>
-                  <FormattedMessage id="banner.title1" />
-                </b>
+                  
+        {this.props.isShowBanner === true &&
+          <div className="home-header-banner">
+            <div className="content-up">
+              <div className="title">
+                <div className="title-text">
+                  <b>
+                    <FormattedMessage id="banner.title1" />
+                  </b>
+                </div>
+                <div className="title-text">
+                  <b>
+                    <FormattedMessage id="banner.title2" />
+                  </b>
+                </div>
               </div>
-              <div className="title-text">
-                <b>
-                  <FormattedMessage id="banner.title2" />
-                </b>
+
+              <div className="search">
+                <div className="search-content">
+                  <i className="fas fa-search"></i>
+                  <input type="text" placeholder="Tìm chuyên khoa khám bệnh" />
+                </div>
               </div>
             </div>
+            {/* Line */}
 
-            <div className="search">
-              <div className="search-content">
-                <i className="fas fa-search"></i>
-                <input type="text" placeholder="Tìm chuyên khoa khám bệnh" />
+            <div className="content-down">
+              <div className="options">
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-hospital"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.bannerp1" />
+                  </div>
+                </div>
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-procedures"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.bannerp2" />
+                  </div>
+                </div>
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-hospital"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.bannerp3" />
+                  </div>
+                </div>
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-microscope"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.bannerp4" />
+                  </div>
+                </div>
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-user-md"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.bannerp5" />
+                  </div>
+                </div>
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-tooth"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.bannerp6" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          {/* Line */}
-
-          <div className="content-down">
-            <div className="options">
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-hospital"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.bannerp1" />
-                </div>
-              </div>
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-procedures"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.bannerp2" />
-                </div>
-              </div>
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-hospital"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.bannerp3" />
-                </div>
-              </div>
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-microscope"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.bannerp4" />
-                </div>
-              </div>
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-user-md"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.bannerp5" />
-                </div>
-              </div>
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-tooth"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.bannerp6" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        }
       </React.Fragment>
     );
   }
@@ -189,7 +196,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));
 //Trong Redux, dispatch là một hàm được cung cấp bởi Redux store để gửi các action đến các reducers.
 // Hàm dispatch nhận vào một action là một đối tượng JavaScript có thuộc tính type (loại hành động) và các thuộc tính khác chứa thông tin cần thiết cho hành động.
 // Khi một action được gửi thông qua hàm dispatch, Redux sẽ xác định reducers nào sẽ được gọi dựa trên type của action. Mỗi reducer sẽ xử lý các hành động tương ứng và thay đổi trạng thái của ứng dụng dựa trên hành động đó.

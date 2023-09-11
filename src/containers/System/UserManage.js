@@ -132,8 +132,11 @@ class UserManage extends Component {
 
                 <h1 className='text-center'>Manage users</h1>
                     <img src="images/search.png" alt="" />
-                <div className='addNewUser' onClick={ ()=>{this.handleAddUser()}}>
-                <a href="/#" className="btn btn-primary btn-lg active btnAddUser" role="button" aria-pressed="true">Add New User</a>
+                <div className='addNewUser' onClick={ ()=>{this.handleAddUser()}}
+                
+                >
+                    {/* <button onClick={() => this.handleAddUser()} className='btn btn-primary px-3'><i className="fas fa-plus"></i>Add new user</button> */}
+                <button href="/#" className="btn btn-primary btn-lg active btnAddUser" role="button" aria-pressed="true">Add New User</button>
                 </div>
                 <section className="table__body">
                 <table>

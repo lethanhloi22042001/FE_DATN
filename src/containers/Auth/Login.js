@@ -63,7 +63,13 @@ class Login extends Component {
 
         }
     }
-    
+  
+    handleKeyDown = (e)=>{
+        console.log('this is event',e);
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            this.handleLogin();
+          }
+    }
 
     render() { 
         return ( 
@@ -93,6 +99,7 @@ class Login extends Component {
                                 <label className =''> Username: </label>
 
                                 <input
+                                     onKeyDown={ (event)=>{this.handleKeyDown(event)}}  
                                      placeholder='Enter your User Name...'  type= 'text' className='form-control '
                                      value={this.state.username} onChange={(event)=>{this.handleOnChangeInput(event)} }
                                 />
@@ -101,6 +108,7 @@ class Login extends Component {
                             <div className='col-12 form-group login-input'>
                                 <label className= ''> Password:</label>
                                 <input
+                                    onKeyDown={ (event)=>{this.handleKeyDown(event)}}  
                                     className='form-control'
                                     placeholder='Enter your password...' type={ this.state.isShowHidePassWord ? 'text' : 'password'}
                                     value={this.state.password} onChange={(event)=>{this.handleOnChangepassword(event)}}
@@ -113,10 +121,10 @@ class Login extends Component {
                             <div className='col-12' style={{color :'red'}}>
                                { this.state.errMessage}
                             </div>
-                            
-                            <button  className='btn-login' onClick={ ()=>{
+                            <button className='btn-login' onClick={ ()=>{
                                 this.handleLogin();
-                            }} >Login</button>
+                            }} >Login
+                            </button>
                             <span className='forgot-password'>Forgot your password?</span>
                             
                             <div className='col-12 text-center mt-3'>

@@ -10,8 +10,8 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 
 import Select from 'react-select';
-import { LANGUAGES } from '../../../utils';
-// import { getDetailInfoDoctor } from '../../../services/userService';
+import { CRUD_ACTIONS, LANGUAGES } from '../../../utils';
+import { getDetailInfoDoctor } from '../../../services/userService';
 import { FormattedMessage } from 'react-intl';
 // import { preProcessFile } from 'typescript';
 
@@ -28,7 +28,8 @@ class ManageDoctor extends Component {
             contentMarkdown : '',
             contentHTML : '',
             listDoctors  : [],
-            // detailDoctors: []
+            hadOldData : 'false',
+
         }
     }
 
@@ -70,10 +71,32 @@ class ManageDoctor extends Component {
         
     }
    
-    handleChange = (selectedOption)=>{
+    handleChangeSelect = async (selectedOption)=>{
         this.setState({
             selectedOption
         });
+
+        let res = await  getDetailInfoDoctor(selectedOption.value);
+        console.log(res);
+        if(res && res.errCode === 0  && res.users && res.users.Markdown){
+            let markdown = res.users.Markdown;
+            this.setState({
+                description: markdown.description,
+                contentMarkdown: markdown.contentMarkdown,
+                contentHTML: markdown.contentHTML,
+                hadOldData : true,
+
+            });
+        }else{
+            this.setState({
+                description: '',
+                contentMarkdown: '',
+                contentHTML: '',
+                hadOldData: false,
+
+            });
+        }
+
     }
     
     handleEditorChange = ({ html, text }) => {
@@ -91,15 +114,18 @@ class ManageDoctor extends Component {
    
     handleSaveContentMarkdown = ()=>{
         this.props.dispatchAdminReducerSaveDoctor({
+            action : this.state.hadOldData === true ? CRUD_ACTIONS.EDIT : CRUD_ACTIONS.CREATE,
             selectedOption: this.state.selectedOption,
             description: this.state.description,
             contentMarkdown : this.state.contentMarkdown,
             contentHTML : this.state.contentHTML,
+            doctorId: this.state.selectedOption.value,
         });
     }
-  
+     
 
     render() {
+        let {hadOldData} = this.state;
         let listDoctors = this.state.listDoctors;
         console.log('Xem State',listDoctors);
         return (
@@ -109,10 +135,9 @@ class ManageDoctor extends Component {
                     <div className='content-left form-group'>
                         <label><FormattedMessage id="admin.manage-doctor.choose-doctor" /></label>
                         <Select
-                            options={this.state.listDoctors}
-                            
-                            defaultValue={this.state.selectedOption}
-                            onChange = { this.handleChange}
+                            options={this.state.listDoctors} // show lists doctor
+                            defaultValue={this.state.selectedOption} // show dữ liệu mặc định
+                            onChange = { this.handleChangeSelect}   // dùng value để setState 
                             placeholder={<FormattedMessage id="admin.manage-doctor.choose-doctor" />}
                         />
                     </div>
@@ -208,13 +233,14 @@ class ManageDoctor extends Component {
                         // onChange={this.handleContentMarkdown(event)}
                         // onChange={ (event)=>{this.handleContentMarkdown(event)}}
                         onChange={this.handleEditorChange}
+                        value={this.state.contentMarkdown}
                     />
                 </div>
                 <button
                     onClick={() => this.handleSaveContentMarkdown()}
                     // className={hasOldData === true ? 'save-content-doctor' : 'create-content-doctor'}>
-                    className='save-content-doctor' >
-                            Save
+                    className= {hadOldData === true ? 'save-content-doctor' :'create-content-doctor'} >
+                        {hadOldData === true ?<span>Lưu</span> : <span>Tạo</span>}
                 </button>
             </div>
         )

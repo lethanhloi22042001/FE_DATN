@@ -4,7 +4,6 @@ import { toast } from "react-toastify"; // toast : thư viện dùng để hiệ
 // export const startDoing = () => ({
 //     type: actionTypes.START,
 // });
-
 export const startDoing = () => {
     return async (dispatch,getState)=>{
         try {
@@ -298,6 +297,34 @@ export const SaveDetailDoctorReduxSucess = () => ({
 export const SaveDetailDoctorReduxFailed  = ()=>({
     type : actionTypes.SAVEDETAILDOCTOR_FAIL,
 })
+
+
+// SAVE DETAIL A DOCTOR
+export const fetchAllScheduleTime = (type) => {
+    return async (dispatch, getState) =>{
+        try {
+             let Arrdata =  await getAllCode('TIME') ;
+            if( Arrdata && Arrdata.errCode === 0 ){
+                toast.success("Lấy Toàn Bộ Thời Gian Thành Công") ; 
+                dispatch(fetchAllScheduleHoursSucess(Arrdata.data));
+            }else{
+                dispatch(fetchAllScheduleHoursFailed());
+                }
+        } catch (errCode) {
+            dispatch(fetchAllScheduleHoursFailed());
+            console.log('saveUserFailed',errCode);
+        }
+    };
+}
+export const fetchAllScheduleHoursSucess = (data) => ({
+    type: actionTypes.FETCH_ALLCODE_SCHEDUAL_HOURS_SUCCESS,
+    dataTime : data,
+});
+
+export const fetchAllScheduleHoursFailed  = ()=>({
+    type : actionTypes.FETCH_ALLCODE_SCHEDUAL_HOURS_FAIL,
+})
+
 
 
 
