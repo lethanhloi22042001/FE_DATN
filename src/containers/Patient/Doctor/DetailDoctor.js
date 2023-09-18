@@ -5,8 +5,7 @@ import HomeHeader from "../../HomePage/HomeHeader";
 import "./DetailDoctor.scss";
 import { getDetailInfoDoctor } from "../../../services/userService";
 import { LANGUAGES ,CRUD_ACTIONS,CommonUtils} from "../../../utils";
-
-// import DoctorSchedule from "./DoctorSchedule";
+import DoctorSchedule from "./DoctorSchedule";
 // import DoctorExtraInfo from "./DoctorExtraInfo";
 // import LikeAndShare from "../SocialPlugin/LikeAndShare";
 // import Comment from "../SocialPlugin/Comment";
@@ -18,14 +17,17 @@ class DetailDoctor extends Component {
     this.state = {
       detailDoctor : {},
       language :'',
+      currentDoctorId: -1,
     }
   }
 
   async componentDidMount() {
-    //Thế props của cái detailDoctor là cái gì
-    console.log('Thế props của cái detailDoctor là cái gì',this.props);
+
     if(this.props.match && this.props.match.params && this.props.match.params.id){
       let id = this.props.match.params.id ;
+      this.setState({
+        currentDoctorId: id
+      })
       let res =  await getDetailInfoDoctor(id);
       if(res.users && res.errCode === 0){
         let user = res.users;
@@ -42,7 +44,6 @@ class DetailDoctor extends Component {
   }
 
   render() {
-    console.log('asd',this.state.detailDoctor);
     let {detailDoctor} = this.state ;
     let {language} = this.props ;
     let nameVi = '',nameEn = '';
@@ -71,8 +72,17 @@ class DetailDoctor extends Component {
             </div>
           </div>
           <div className="schedule-doctor">
-            <div className="content-left"></div>
-            <div className="content-right"></div>
+                        <div className='content-left'>
+                            <DoctorSchedule
+                                doctorIdFromParent={this.state.currentDoctorId}
+                            />
+                        </div>
+                        <div className='content-right'>
+                          <h1>Truyền động id của bác sĩ để lấy phòng khám , cũng như chuyên khoa</h1>
+                            {/* <DoctorExtraInfo
+                                doctorIdFromParent={this.state.currentDoctorId}
+                            /> */}
+                        </div>
           </div>
           <div className="detail-info-doctor"> 
           {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.contentHTML 
